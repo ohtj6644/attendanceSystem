@@ -16,4 +16,10 @@ public class viewController {
         return "sign_up";
 
     }
+
+    //-----------------유저 로그인 화면 반환---------------------//
+    @GetMapping("/user/login")
+    public String login(){
+        return "login_form";
+    }
 }
