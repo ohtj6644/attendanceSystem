@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +28,12 @@ public class UserService {
     public SiteUser newUser(String username, String password) {
         SiteUser user = new SiteUser();
         user.setUsername(username);
+        if(username.equals("admin")){
+            user.setRole(UserRole.ADMIN);
+        }
+        // 생성된 user 이름이 "admin" 일 경우 관리자 권한 부여 //
+
+
         user.setPassword(passwordEncoder.encode(password));
         user.setSignupDate(LocalDateTime.now());
 
@@ -54,6 +61,18 @@ public class UserService {
 
     public SiteUser findUser(String username){
         return this.userRepo.findByUsername(username);
+    }
+
+
+
+    //----------------------------user login--------------------------------------//
+    public boolean authenticateUser(String username, String password) {
+        Optional<SiteUser> siteUserOptional = this.userRepo.findByusername(username);
+        if (siteUserOptional.isPresent()) {
+            SiteUser siteUser = siteUserOptional.get();
+            return passwordEncoder.matches(password, siteUser.getPassword());
+        }
+        return false;
     }
 
 }

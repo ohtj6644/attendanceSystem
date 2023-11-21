@@ -17,10 +17,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class MongoUserDetailsService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -30,9 +30,10 @@ public class MongoUserDetailsService implements UserDetailsService {
         }
         SiteUser siteUser = _siteUser.get();
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(siteUser.getRole().getAuthority()));
+
+        // 사용자 역할을 authorities에 추가
+        authorities.add(new SimpleGrantedAuthority(siteUser.getRole().getValue()));
 
         return new User(siteUser.getUsername(), siteUser.getPassword(), authorities);
     }
-
 }

@@ -35,7 +35,7 @@ dependencies {
 	testImplementation 'io.projectreactor:reactor-test'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	testImplementation 'org.springframework.security:spring-security-test'
-	implementation 'com.sun.mail:jakarta.mail:2.0.1'
+
 }
 
 tasks.named('bootBuildImage') {

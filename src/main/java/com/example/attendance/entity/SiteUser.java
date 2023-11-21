@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+
 import java.time.LocalDateTime;
 
 @Document("site_user")
@@ -33,8 +34,8 @@ public class SiteUser {
     private LocalDateTime signupDate;
     //가입일시
 
-    private UserRole role;
-    //권한
+
+    private UserRole role=UserRole.USER;
 
     @DBRef
     private Uuid Uuid_id;

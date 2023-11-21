@@ -1,4 +1,4 @@
-package com.example.attendance.controller.rest;
+package com.example.attendance.controller.rest.user;
 
 
 import com.example.attendance.service.UserService;
@@ -6,10 +6,12 @@ import com.example.attendance.entity.SiteUser;
 import com.example.attendance.user.UserCreateForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 
 
 @RestController
@@ -43,5 +45,10 @@ public class UserController {
         // JSON 응답 반환
         return ResponseEntity.ok("유저 생성 완료. 유저번호:" + user.getUuid());
     }
+
+
+
+
+
 
 }
