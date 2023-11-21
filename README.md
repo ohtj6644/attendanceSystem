@@ -30,3 +30,7 @@
 
   1. MongoUserDetailsService / SecurityConfig / UserSecurityService 
   코드 설명을 위한 주석 추가 (해당부분 공부필요 )
+     
+
+- [Security 부분 주석 추가]_001_login-2 
+  1. 추가 
