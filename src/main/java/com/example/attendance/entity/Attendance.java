@@ -11,4 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Attendance {
+    // 근태 엔티티 //
+
 }

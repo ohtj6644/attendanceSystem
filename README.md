@@ -26,3 +26,7 @@
   2. UserRole default값 user 로 설정 / username = admin 으로 가입시 관리자권한 부여.
   3. 근태 관련 서비스,컨트롤러,레포,엔티티 생성 
   
+- [Security 부분 주석 추가]_001_login
+
+  1. MongoUserDetailsService / SecurityConfig / UserSecurityService 
+  코드 설명을 위한 주석 추가 (해당부분 공부필요 )

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequiredArgsConstructor
 public class viewController {
-
+    // 화면(view) 반환 컨트롤러 //
 
     private final UserService userService;
 
