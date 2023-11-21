@@ -1,0 +1,11 @@
+server:
+  port: 8001
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/atten
+      authentication-database: admin
+      username: dbAdmin
+      password: 123123
+
