@@ -20,6 +20,10 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UuidRepository uuidRepo;
 
+
+
+    //------------------------유저 생성 -----------------------//
+
     public SiteUser newUser(String username, String password) {
         SiteUser user = new SiteUser();
         user.setUsername(username);
@@ -36,16 +40,17 @@ public class UserService {
             uuid.setId(String.format("%08d", nextId));
         }
 
-        this.uuidRepo.save(uuid);
         user.setUuid_id(uuid);
         user.setUuid(uuid.getId());
         this.userRepo.insert(user);
-
         uuid.setUser(user);
-        this.uuidRepo.save(uuid);
+        this.uuidRepo.insert(uuid);
 
         return user;
     }
+
+
+    //--------------------username 으로 user를 찾아서 반환 ------------------------//
 
     public SiteUser findUser(String username){
         return this.userRepo.findByUsername(username);

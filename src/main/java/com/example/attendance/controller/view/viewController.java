@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class viewController {
 
 
-
+    //----------------유저 회원가입 화면 반환 ------------------//
     @GetMapping("/signup")
     public String signUp(UserCreateForm userCreateForm){
 

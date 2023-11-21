@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @Data
 public class Uuid {
-    // 유저의 고유번호
+    // 유저의 고유번호 저장(중복방지 )
 
 
     @Id

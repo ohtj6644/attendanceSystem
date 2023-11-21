@@ -22,17 +22,23 @@ public class SiteUser {
 
     @Id
     private String uuid;
+    //회원번호 (UUID 의 id 값으로 받아옴 )
 
     private String username;
+    //회원 로그인 id
 
     private String password;
+    //회원 비밀번호
 
     private LocalDateTime signupDate;
+    //가입일시
 
     private UserRole role;
+    //권한
 
     @DBRef
     private Uuid Uuid_id;
+    //고유번호
 
 
 }
