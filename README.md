@@ -34,3 +34,15 @@
 
 - [Security 부분 주석 추가]_001_login-2 
   1. 추가 
+  
+
+
+### 2023-11-23 
+
+-
+[Attendance 생성]_001_login 
+  1. attendance 엔티티생성 및 출근 구현 
+  2. main 브랜치에 merge
+
+- [Attendance 브랜치 생성]_002_attendance
+  1. attendance 브랜치 생성 및 최초 푸쉬 
