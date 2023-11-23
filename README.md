@@ -39,7 +39,7 @@
 
 ### 2023-11-23 
 
--[Attendance 생성]_001_login 
+- [Attendance 생성]_001_login 
   1. attendance 엔티티생성 및 출근 구현 
   2. main 브랜치에 merge
 
@@ -51,3 +51,6 @@
   1. 근무 종료 메서드 추가 
   2. 근무 시작 추가
   
+
+- [주석 및 설명 추가 ]_002_attendance
+  1.  주석 및 설명 추가 ,수정 

@@ -17,7 +17,7 @@ public class AttendanceController {
     private final AttendanceService attendanceService;
     private final UserService userService;
 
-    // 근무 시작  //
+    //------------------------근무 시작-------------------  //
     @GetMapping("/user/startWork")
     public String startWork(Principal principal){
         SiteUser user=userService.findUser(principal.getName());
@@ -33,16 +33,18 @@ public class AttendanceController {
 
     }
 
-    // 근무 종료
+    // ---------------------근무 종료-----------------------//
     @GetMapping("/user/endWork")
     public String endWork(Principal principal){
         SiteUser user=userService.findUser(principal.getName());
 
+
+        //시작한 근무가 없으면 메시지 반환
         if(attendanceService.getNowAttendance(user)==null){
             return "종료 할 근무가 없습니다.";
         }else {
             String woriMessage = attendanceService.endWork(attendanceService.getNowAttendance(user));
-            return woriMessage+"근무종료";
+            return woriMessage+" 근무 종료";
 
         }
 

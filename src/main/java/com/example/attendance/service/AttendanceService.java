@@ -24,7 +24,7 @@ public class AttendanceService {
     private final UserRepository userRepository;
 
 
-    // 근무 시작 메서드 //
+    //-------------------------------근무 시작 메서드------------------------//
     public String startWork(SiteUser user){
         Attendance attendance = new Attendance();
         attendance.setId(LocalDate.now().toString()+user.getUsername());
@@ -35,7 +35,7 @@ public class AttendanceService {
         return attendance.getId();
 
     }
-    // 근무 종료 메서드 //
+    //-------------------------------근무 종료 메서드-----------------------//
     public  String endWork(Attendance attendance){
         //근무 종료시간 저장
         attendance.setEndWorkTime(LocalDateTime.now());
@@ -55,7 +55,7 @@ public class AttendanceService {
     }
 
 
-    //해당 날짜에 이미 만들어진 근무가 있는지 확인
+    //-------------------해당 날짜에 이미 만들어진 근무가 있는지 확인------------//
     public Attendance getNowAttendance(SiteUser user){
         String id = LocalDate.now().toString()+user.getUsername();
 
