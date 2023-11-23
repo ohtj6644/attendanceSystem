@@ -10,7 +10,9 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Document("site_user")
 @AllArgsConstructor
@@ -31,14 +33,22 @@ public class SiteUser {
     //회원 비밀번호
 
     private LocalDateTime signupDate;
-    //가입일시
+    //가입일시 (해당 데이터 기준으로 연차생성)
 
-    private UserRole role;
-    //권한
+
+    private UserRole role=UserRole.USER;
+    //회원 권한 (초기값 user 로 셋팅 )
 
     @DBRef
     private Uuid Uuid_id;
     //고유번호
+
+    @DBRef
+    private List<Attendance> attendances;
+    //근태
+
+    private Integer AnnualCount;
+    //연차 개수
 
 
 }
