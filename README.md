@@ -11,7 +11,7 @@
 - git 규칙 
   
     1. 새 로직 작업 시작 시 000(브랜치번호)_작업명 으로 새 브랜치 생성.
-    2. 작업이 끝난 후 main에 병합 
+    2. 브랜치명의 작업이 모두 완료될 경우 main에 브랜치 Merge. 
     3. 커밋명 = [작업내용]_브랜치이름(000{브랜치번호}_작업명) 으로 통일.
   
 - [mainPage_접속자권한/Login 로직 작업중]_001_login
@@ -39,10 +39,15 @@
 
 ### 2023-11-23 
 
--
-[Attendance 생성]_001_login 
+-[Attendance 생성]_001_login 
   1. attendance 엔티티생성 및 출근 구현 
   2. main 브랜치에 merge
 
 - [Attendance 브랜치 생성]_002_attendance
   1. attendance 브랜치 생성 및 최초 푸쉬 
+  
+
+- [Attendance 근무종료]_002_attendance
+  1. 근무 종료 메서드 추가 
+  2. 근무 시작 추가
+  
