@@ -1,18 +1,25 @@
 package com.example.attendance.controller.view;
 
 
+import com.example.attendance.entity.Attendance;
 import com.example.attendance.entity.SiteUser;
+import com.example.attendance.service.AttendanceService;
 import com.example.attendance.service.UserService;
 import com.example.attendance.user.UserCreateForm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
+import java.time.YearMonth;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -20,6 +27,7 @@ public class viewController {
     // 화면(view) 반환 컨트롤러 //
 
     private final UserService userService;
+    private final AttendanceService attendanceService;
 
     //----------------유저 회원가입 화면 반환 ------------------//
     @GetMapping("/signup")
@@ -60,6 +68,21 @@ public class viewController {
 
 
         return "main_Page";
+    }
+
+
+
+    //---------------------- 한달 간 근무 내역 --------------------------//
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/user/monthAttendance/{date}")
+    public String getMonthAttendance(Model model, Principal principal, @PathVariable("date")YearMonth yearMonth,@RequestParam(value = "page" , defaultValue = "0" )int page){
+        SiteUser user= this.userService.findUser(principal.getName());
+        List<Attendance> attendances = attendanceService.getMonthAttendance(user , page);
+        int attendanceSize= attendances.size();
+
+        model.addAttribute("attendances",attendances);
+        model.addAttribute("attendanceSize",attendanceSize);
+        return "Month_Attendance";
     }
 
 }

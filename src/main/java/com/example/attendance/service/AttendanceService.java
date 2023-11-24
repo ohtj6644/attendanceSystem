@@ -8,12 +8,14 @@ import com.example.attendance.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.apache.tomcat.jni.Local;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -63,6 +65,13 @@ public class AttendanceService {
     }
 
 
+
+    //-------------------한달간 근무내역 확인 ----------------------------------//
+    public List<Attendance> getMonthAttendance(SiteUser user, int page){
+
+
+
+    }
 
 
 
