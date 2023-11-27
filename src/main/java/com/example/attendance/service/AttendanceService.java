@@ -15,6 +15,7 @@ import java.sql.Time;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,12 +68,16 @@ public class AttendanceService {
 
 
     //-------------------한달간 근무내역 확인 ----------------------------------//
-    public List<Attendance> getMonthAttendance(SiteUser user, int page){
+    public List<Attendance> getMonthAttendance(SiteUser user, int month , int year){
+        LocalDateTime startOfMonth = LocalDateTime.of(year, month, 1, 0, 0);
+        LocalDateTime endOfMonth = startOfMonth.plusMonths(1).minusSeconds(1);
 
-
-
+        return attenRepo.findByUserAndStartWorkTimeBetween(user, startOfMonth, endOfMonth);
     }
 
 
-
 }
+
+
+
+

@@ -74,10 +74,11 @@ public class viewController {
 
     //---------------------- 한달 간 근무 내역 --------------------------//
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("/user/monthAttendance/{date}")
-    public String getMonthAttendance(Model model, Principal principal, @PathVariable("date")YearMonth yearMonth,@RequestParam(value = "page" , defaultValue = "0" )int page){
+    @GetMapping("/user/monthAttendance/")
+    public String getMonthAttendance(Model model, Principal principal, @RequestParam(value = "month",defaultValue = "0") int month,
+                                     @RequestParam(value = "year",defaultValue = "0") int year){
         SiteUser user= this.userService.findUser(principal.getName());
-        List<Attendance> attendances = attendanceService.getMonthAttendance(user , page);
+        List<Attendance> attendances = attendanceService.getMonthAttendance(user , month , year);
         int attendanceSize= attendances.size();
 
         model.addAttribute("attendances",attendances);

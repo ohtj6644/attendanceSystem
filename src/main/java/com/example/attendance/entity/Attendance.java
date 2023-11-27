@@ -31,8 +31,12 @@ public class Attendance {
     private LocalDateTime endWorkTime;
     //퇴근시간
 
+
     private Time workTime;
     //근무 시간
+
+    private int Annual=0;
+    //휴가여부
 
 
 }
