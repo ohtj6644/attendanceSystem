@@ -12,10 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.YearMonth;
+import java.time.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,6 +70,22 @@ public class AttendanceService {
         LocalDateTime endOfMonth = startOfMonth.plusMonths(1).minusSeconds(1);
 
         return attenRepo.findByUserAndStartWorkTimeBetween(user, startOfMonth, endOfMonth);
+    }
+
+    //--------------------어제 날짜의 근무 전체 반환 ------------------------------------//
+    public List<Attendance> getYesterdayAttendance(){
+        LocalDateTime start = LocalDateTime.of(LocalDate.now().minusDays(1), LocalTime.MIN);
+        LocalDateTime end =LocalDateTime.of(LocalDate.now().minusDays(1),LocalTime.MAX);
+        // 전날 00시 / 24시 가져오기.
+
+
+        return attenRepo.findByStartWorkTimeBetween(start,end);
+    }
+
+    //----------------------근무 삭제 ------------------------------------------------//
+    public void deleteAttendance(Attendance attendance){
+        this.attenRepo.delete(attendance);
+
     }
 
 
