@@ -71,3 +71,12 @@
 - [휴가/연차 작업 브랜치 추가]_003_Annual
   1. 휴가, 연차 관련작업 시작 
   2. 새 브랜치 생성 
+
+
+
+- [AnnualCountScheduler 추가]_003_Annual
+  1. AnnualCountScheduler 클래스(연차생성 스케줄러) 추가 . 
+  2. Application 실행 시 Admin 계정 확인 후 없으면 추가하는 메서드 작성 
+  3. controller>rest 라이브러리명 rest>>>api 로 변경 
+
+  % AnnualCountScheduler 수정 필요함 

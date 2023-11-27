@@ -1,4 +1,4 @@
-package com.example.attendance.controller.rest.user;
+package com.example.attendance.controller.api.user;
 
 
 import com.example.attendance.service.UserService;
@@ -6,12 +6,8 @@ import com.example.attendance.entity.SiteUser;
 import com.example.attendance.user.UserCreateForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
 
 
 @RestController

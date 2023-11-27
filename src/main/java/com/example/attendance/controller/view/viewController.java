@@ -82,7 +82,10 @@ public class viewController {
         int attendanceSize= attendances.size();
 
         model.addAttribute("attendances",attendances);
+        //한달동안 근무한 내역 리스트로 반환
         model.addAttribute("attendanceSize",attendanceSize);
+        //한달동안 근무한 날짜 수 반환
+
         return "Month_Attendance";
     }
 

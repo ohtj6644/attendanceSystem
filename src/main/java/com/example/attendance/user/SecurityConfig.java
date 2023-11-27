@@ -1,4 +1,4 @@
-package com.example.attendance;
+package com.example.attendance.user;
 
 
 import com.example.attendance.user.MongoUserDetailsService;

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -73,6 +74,15 @@ public class UserService {
             return passwordEncoder.matches(password, siteUser.getPassword());
         }
         return false;
+    }
+
+    //----------------------------모든유저 반환-------------------------------------//
+    public List<SiteUser> getAllUsers(){
+        return this.userRepo.findAll();
+    }
+    //-----------------------------유저 저장 ----------------------------------------//
+    public void saveUser(SiteUser user){
+        this.userRepo.save(user);
     }
 
 }
