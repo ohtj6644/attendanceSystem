@@ -1,9 +1,8 @@
-package com.example.attendance;
+package com.example.attendance.controller.Scheduler;
 
 
 import com.example.attendance.entity.SiteUser;
 import com.example.attendance.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
