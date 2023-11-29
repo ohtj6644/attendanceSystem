@@ -48,7 +48,16 @@ public class SiteUser {
     //근태
 
     private Integer AnnualCount;
-    //연차 개수
+    //잔여 휴가 개수
+
+    private Integer useAnnal;
+    //사용한 휴가 개수
+
+    private Integer YearAnnalCount;
+    //잔여 연차 개수
+
+    private Integer useYearAnnal;
+    //사용한 연차 개수
 
 
 }

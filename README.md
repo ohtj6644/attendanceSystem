@@ -67,3 +67,29 @@
 - [한달간 근무내역 리스트_2]_002_attendance
   1. 한달간 근무내역 리스트 조회 기능 추가 완료 
      
+
+- [휴가/연차 작업 브랜치 추가]_003_Annual
+  1. 휴가, 연차 관련작업 시작 
+  2. 새 브랜치 생성 
+
+
+
+- [AnnualCountScheduler 추가]_003_Annual
+  1. AnnualCountScheduler 클래스(연차생성 스케줄러) 추가 . 
+  2. Application 실행 시 Admin 계정 확인 후 없으면 추가하는 메서드 작성 
+  3. controller>rest 라이브러리명 rest>>>api 로 변경 
+
+  % AnnualCountScheduler 수정 필요함 
+
+- [AnnualCountScheduler 수정 , AttendanceScheduler 추가]_003_Annual
+  1. AttendanceScheduler= 매일 자정실행/ 전날 퇴근처리를 안한 근무를 삭제하는 스케줄러 
+  2. AnnualCountScheduler 연차 / 월차 구분하여 카운트 처리.
+
+- [연월차 카운트 수정 ]_003_Annual 
+- 연월차 스케줄러 및 엔티티 수정 작업중 
+
+
+- [볗합]_003_Annual 
+  1. Main 에 병합 후 프론트 작업 시작 예정 
+  2. 휴가신청로직 필요함
+  3. 관리자로직 필요함

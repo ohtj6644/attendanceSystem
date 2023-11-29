@@ -1,4 +1,4 @@
-package com.example.attendance.controller.rest.attendance;
+package com.example.attendance.controller.api.attendance;
 
 
 import com.example.attendance.entity.SiteUser;
