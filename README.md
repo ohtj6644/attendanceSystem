@@ -83,4 +83,7 @@
 
 - [AnnualCountScheduler 수정 , AttendanceScheduler 추가]_003_Annual
   1. AttendanceScheduler= 매일 자정실행/ 전날 퇴근처리를 안한 근무를 삭제하는 스케줄러 
-  2. AnnualCountScheduler 연차 / 월차 구분하여 카운트 처리. 
+  2. AnnualCountScheduler 연차 / 월차 구분하여 카운트 처리.
+
+- [연월차 카운트 수정 ]_003_Annual 
+- 연월차 스케줄러 및 엔티티 수정 작업중 
