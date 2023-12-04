@@ -27,6 +27,9 @@ public class AttendanceApplication implements CommandLineRunner {
 		SpringApplication.run(AttendanceApplication.class, args);
 	}
 
+
+
+	// 최초 실행 시 user 정보 중 admin 계정이 없을경우 admin 계정 자동생성.
 	@Override
 	public void run(String... args) throws Exception {
 		if(userRepository.findByUsername("admin")==null){
@@ -34,6 +37,7 @@ public class AttendanceApplication implements CommandLineRunner {
 		}
 
 	}
+
 
 
 
