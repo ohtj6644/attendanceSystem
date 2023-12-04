@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+
+<body>
+
+
+
+<div class="container" th:fragment="containerFragment">
+
+
+    <div class="row">
+        <header>
+            <a th:href="@{/}" class="mainLogo"><img src="https://i.postimg.cc/sXkq1bdm/2-removebg-preview.png" ></a>
+        </header>
+    </div>
+    <nav id="sideNavParent" class="pdsa-sn-wrapper">
+        <ul id="sideNavParent">
+            <li class="pdsa-sn-brand" th:if="${!todayState}">
+                <a  class="btn btn-success" id="startWork">▶ 근무시작</a>
+            </li>
+            <li class="pdsa-sn-brand" th:if="${todayState}">
+                <a  class="btn btn-success" id="endWork">■ 근무종료</a>
+            </li>
+            <li>
+                <a href="Default.html">
+                    <span class="hidden-xs">홈 피드</span>
+                    <i class="glyphicon glyphicon-home visible-xs"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#"
+                   data-toggle="collapse"
+                   data-target="#ulGenres">
+            <span class="hidden-xs">
+              휴가&nbsp;<b class="caret"></b>
+            </span>
+                    <i class="glyphicon glyphicon-globe visible-xs"></i>
+                </a>
+                <div class="hidden-xs">
+                    <ul id="ulGenres" class="collapse" data-parent="#sideNavParent">
+                        <li>
+                            <a href="#">All Genres</a>
+                        </li>
+                        <li>
+                            <a href="#">Jazz</a>
+                        </li>
+                        <li>
+                            <a href="#">Country</a>
+                        </li>
+                        <li>
+                            <a href="#">Rock</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a href="#"
+                   data-toggle="collapse"
+                   data-target="#ulPlaylists">
+            <span class="hidden-xs">
+              근무&nbsp;<b class="caret"></b>
+            </span>
+                    <i class="glyphicon glyphicon-list-alt visible-xs"></i>
+                </a>
+                <div class="hidden-xs">
+                    <ul id="ulPlaylists" class="collapse" data-parent="#sideNavParent">
+                        <li>
+                            <a href="#">All Playlists</a>
+                        </li>
+                        <li>
+                            <a href="#">My Top Rated</a>
+                        </li>
+                        <li>
+                            <a href="#">Top Country</a>
+                        </li>
+                        <li>
+                            <a href="#">Top Classic Rock</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="hidden-xs">회사 문서</span>
+                    <i class="glyphicon glyphicon-music visible-xs"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="hidden-xs">구성원</span>
+                    <i class="glyphicon glyphicon-download visible-xs"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+</body>
+</html>

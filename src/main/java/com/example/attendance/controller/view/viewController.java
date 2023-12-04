@@ -8,6 +8,7 @@ import com.example.attendance.service.UserService;
 import com.example.attendance.user.UserCreateForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,7 +65,18 @@ public class viewController {
     @GetMapping("/")
     @PreAuthorize("isAuthenticated()")
     // 로그인이 안된 유저는 메인페이지 접근 시 로그인페이지로 반환.
-    public String mainPage(Model model){
+    public String mainPage(Model model , Principal principal){
+
+        boolean todayState ;
+
+        SiteUser user = userService.findUser(principal.getName());
+        if (attendanceService.getNowAttendance(user) != null) {
+            todayState = true;
+        } else{
+            todayState = false;
+        }
+
+        model.addAttribute("todayState",todayState);
 
 
         return "main_Page";

@@ -1,0 +1,60 @@
+.login-wrp{
+   max-width: 400px;
+   width: 100%;
+   margin: 50px auto;
+}
+.top{
+   background: #D6F1DD;
+   height: 300px;
+   position: relative
+}
+.logo{
+   position: absolute;
+   max-width: 250px;
+   top: 5%;
+   left: 50%;
+   transform: translateX(-50%);
+   -webkit-transform: translateX(-50%);
+}
+.bottom{
+   background: #eee;
+   height: 300px;
+   position:relative;
+}
+.bottom .login-form{
+   background: #fff;
+   position: absolute;
+   box-shadow: 1px 1px 10px #999;
+   width: 90%;
+   top:-38%;
+   left: 5%;
+   border-radius: 5px;
+   padding: 50px 40px;
+}
+.btn{
+   border-radius: 30px
+}
+.btn-primary{
+   background: green;
+   border-color: green;
+}
+.btn-primary:hover,.btn-primary:focus{
+   background: #B0F4C1;
+   border-color: #B0F4C1;
+}
+.checkbox-inline{
+   cursor: pointer;
+}
+.btn-link{
+   color: #999;
+   margin-top: 10px;
+   display: block
+}
+.btn-link:hover,.btn-link:focus{
+   color: #777;
+}
+
+.logo>img{
+  padding:0;
+  margin:0;
+}
