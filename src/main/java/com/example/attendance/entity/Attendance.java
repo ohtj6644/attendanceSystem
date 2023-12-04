@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.sql.Time;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Document("attendance")
 @Data
@@ -32,7 +33,7 @@ public class Attendance {
     //퇴근시간
 
 
-    private Time workTime;
+    private int workTime;
     //근무 시간
 
     private int Annual=0;

@@ -34,16 +34,18 @@ public class AttendanceController {
 
     // ---------------------근무 종료-----------------------//
     @GetMapping("/user/endWork")
-    public String endWork(Principal principal){
+    public ResponseEntity<String> endWork(Principal principal){
         SiteUser user=userService.findUser(principal.getName());
 
 
         //시작한 근무가 없으면 메시지 반환
         if(attendanceService.getNowAttendance(user)==null){
-            return "종료 할 근무가 없습니다.";
-        }else {
+            return ResponseEntity.badRequest().body("종료할 근무가 없습니다. ");
+        }else  if(attendanceService.getNowAttendance(user).getEndWorkTime()!=null){
+            return ResponseEntity.badRequest().body("이미 오늘 근무가 종료되었습니다 ");
+        } else {
             String woriMessage = attendanceService.endWork(attendanceService.getNowAttendance(user));
-            return woriMessage+" 근무 종료";
+            return ResponseEntity.ok(woriMessage+" 근무 종료");
 
         }
 
