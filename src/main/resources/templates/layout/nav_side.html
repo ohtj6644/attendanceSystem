@@ -2,10 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
+
+
+
 <div class="container" th:fragment="containerFragment">
+
+
     <div class="row">
         <header>
             <a th:href="@{/}" class="mainLogo"><img src="https://i.postimg.cc/sXkq1bdm/2-removebg-preview.png" ></a>
@@ -13,8 +19,11 @@
     </div>
     <nav id="sideNavParent" class="pdsa-sn-wrapper">
         <ul id="sideNavParent">
-            <li class="pdsa-sn-brand">
-                <a href="Default.html" class="btn btn-success">▶ 근무시작</a>
+            <li class="pdsa-sn-brand" th:if="${!todayState}">
+                <a  class="btn btn-success" id="startWork">▶ 근무시작</a>
+            </li>
+            <li class="pdsa-sn-brand" th:if="${todayState}">
+                <a  class="btn btn-success" id="endWork">■ 근무종료</a>
             </li>
             <li>
                 <a href="Default.html">
@@ -90,7 +99,6 @@
     </nav>
 </div>
 
-<script src="Scripts/jquery-1.11.0.min.js"></script>
-<script src="Scripts/bootstrap.min.js"></script>
+
 </body>
 </html>
