@@ -29,7 +29,7 @@ public class AttendanceApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		if(userRepository.findByusername("admin")==null){
+		if(userRepository.findByUsername("admin")==null){
 			this.userService.newUser("admin","1234");
 		}
 

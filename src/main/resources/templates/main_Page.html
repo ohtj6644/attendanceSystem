@@ -3,10 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/nav_side.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
+<!--네비 , 사이드바 가져오기 -->
+<div th:include="layout/nav_side :: containerFragment"></div>
+
+<!--아래부터 내용 -->
+<div class="container body-content">
+    <div class="row">
+        <div class="col-xs-10 col-lg-12">
+            <h1>
+                홈피드에 게시판 예정
+            </h1>
+            <p>
+                홈피드에 게시판 예정
+            </p>
+        </div>
+    </div>
+</div>
 
 
-로그인 성공~!
+<script src="Scripts/jquery-1.11.0.min.js"></script>
+<script src="Scripts/bootstrap.min.js"></script>
 </body>
 </html>
