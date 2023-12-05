@@ -47,6 +47,10 @@ public class SiteUser {
     private List<Attendance> attendances;
     //근태
 
+    @DBRef
+    private List<Notice> notices;
+    //근태
+
     private Integer AnnualCount;
     //잔여 휴가 개수
 
