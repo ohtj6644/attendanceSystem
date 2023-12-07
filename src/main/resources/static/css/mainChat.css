@@ -1,0 +1,31 @@
+.message-candidate {
+  background: #D6F1DD;
+  padding: 40px;
+  max-width: 600px;
+  margin-bottom: 10px;
+}
+
+
+.messaging {
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+.message-text {
+  margin-top: 10px;
+  margin-left:1px;
+}
+
+.message-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
+  display: inline-block;
+}
+
+.message-name {
+  margin-left: 10px;
+  display: inline-block;
+}
