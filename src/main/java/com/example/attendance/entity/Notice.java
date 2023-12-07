@@ -6,6 +6,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+
 @Document("Notice")
 @Data
 @Getter
@@ -25,5 +27,6 @@ public class Notice {
     private  SiteUser author;
     //작성자
 
+    private LocalDateTime createDate;
 
 }
