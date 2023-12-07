@@ -42,11 +42,12 @@ public class AttendanceService {
 
         //근무시작 과 끝 의 차 구함.
         Duration duration=Duration.between(attendance.getStartWorkTime(),attendance.getEndWorkTime());
-        long milliseconds = duration.toMillis();
-        Time time = new Time(milliseconds);
+
+        int hours= duration.toHoursPart()*60;
+        int minutes = duration.toMinutesPart();
 
         //구한 시간차를 근무시간에 저장.
-        attendance.setWorkTime(time);
+        attendance.setWorkTime(hours+minutes);
 
         this.attenRepo.save(attendance);
 

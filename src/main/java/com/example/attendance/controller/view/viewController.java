@@ -70,9 +70,16 @@ public class viewController {
         boolean todayState ;
 
         SiteUser user = userService.findUser(principal.getName());
-        if (attendanceService.getNowAttendance(user) != null) {
+
+        if(attendanceService.getNowAttendance(user)==null){
+            todayState = false;
+        }else if ((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()== null) ) {
             todayState = true;
-        } else{
+            model.addAttribute("startWorkTime",attendanceService.getNowAttendance(user).getStartWorkTime());
+
+        }else if((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()!= null)){
+            todayState = false;
+        }else {
             todayState = false;
         }
 
