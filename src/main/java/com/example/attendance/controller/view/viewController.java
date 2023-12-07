@@ -2,8 +2,10 @@ package com.example.attendance.controller.view;
 
 
 import com.example.attendance.entity.Attendance;
+import com.example.attendance.entity.Notice;
 import com.example.attendance.entity.SiteUser;
 import com.example.attendance.service.AttendanceService;
+import com.example.attendance.service.NoticeService;
 import com.example.attendance.service.UserService;
 import com.example.attendance.user.UserCreateForm;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +31,7 @@ public class viewController {
 
     private final UserService userService;
     private final AttendanceService attendanceService;
+    private final NoticeService noticeService;
 
     //----------------유저 회원가입 화면 반환 ------------------//
     @GetMapping("/signup")
@@ -70,6 +73,7 @@ public class viewController {
         boolean todayState ;
 
         SiteUser user = userService.findUser(principal.getName());
+        List<Notice> noticeList = this.noticeService.getList();
 
         if(attendanceService.getNowAttendance(user)==null){
             todayState = false;
@@ -83,6 +87,7 @@ public class viewController {
             todayState = false;
         }
 
+        model.addAttribute("noticeList",noticeList);
         model.addAttribute("todayState",todayState);
 
 

@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/nav_side.css"/>
+    <link rel="stylesheet" href="/css/mainChat.css"/>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -27,16 +28,38 @@
 <!--네비 , 사이드바 가져오기 -->
 <div th:include="layout/nav_side :: containerFragment"></div>
 
-<!--아래부터 내용 -->
+<!--아래부터 채팅 -->
 <div class="container body-content">
     <div class="row">
         <div class="col-xs-10 col-lg-12">
-            <h1>
-                홈피드에 게시판 예정
-            </h1>
-            <p>
-                홈피드에 게시판 예정
-            </p>
+            <div class="chat">
+                <h2 class="text-center">Notice</h2>
+                <div class="message-candidate center-block"  th:each="notice, loop : ${noticeList}">
+                    <div class="row">
+                        <div class="col-xs-8 col-md-6">
+                            <img src="http://imgc.allpostersimages.com/images/P-473-488-90/68/6896/2GOJ100Z/posters/despicable-me-2-minions-movie-poster.jpg" class="message-photo">
+                            <h4 class="message-name" th:text="${notice.author.username}">Mr. Minion</h4>
+                        </div>
+                        <div class="col-xs-4 col-md-6 text-right message-date" th:text="${notice.createDate}">Date here</div>
+                    </div>
+                    <div class="row message-text" th:text="${notice.content}">
+                        내용
+                    </div>
+                </div>
+
+                <div class="messaging center-block">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control">
+                                <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Send</button>
+          </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
