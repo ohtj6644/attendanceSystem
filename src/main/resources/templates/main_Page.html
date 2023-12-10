@@ -79,18 +79,19 @@
             $.ajax({
                 type: 'POST',
                 url: '/notice/create',
-                data: formData, // 여기서 세미콜론(;)을 쉼표(,)로 수정
+                data: formData,
                 processData: false,
                 contentType: false,
                 success: function (data) {
                     // 성공 시 팝업 창에 결과 표시
                     alert(data);
                     location.reload();
+                    // 성공 후 페이지 리로드
                 },
                 error: function (xhr) {
                     // 실패 시 적절한 처리
                     if (xhr.status === 400) {
-                        alert(xhr.responseText); // 서버에서 전달한 오류 메시지 표시
+                        alert(xhr.responseText); // 서버에서 전달한 오류 메시지 팝업창 표시
                     } else {
                         console.error('Ajax 요청 실패:', xhr);
                     }

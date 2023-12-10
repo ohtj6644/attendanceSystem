@@ -15,6 +15,8 @@
     <div class="row">
         <header>
             <a th:href="@{/}" class="mainLogo"><img src="https://i.postimg.cc/sXkq1bdm/2-removebg-preview.png" ></a>
+            <button class="header__menu__link"  id="logout" sec:authorize="isAuthenticated()" type="button"
+                >로그아웃</button>
         </header>
     </div>
     <nav id="sideNavParent" class="pdsa-sn-wrapper">
@@ -100,6 +102,34 @@
     </nav>
 </div>
 
+
+<script>
+    $(document).ready(function () {
+        // 로그아웃 버튼 클릭 시
+        $('#logout').click(function (e) {
+            e.preventDefault(); // 기본 동작 방지 (페이지 이동)
+
+            // Ajax 요청
+            $.ajax({
+                type: 'GET',
+                url: '/user/logout',
+                success: function (data) {
+                    // 성공 시 팝업 창에 결과 표시
+                    alert(data);
+                    location.reload();
+                },
+                error: function (xhr) {
+                    // 실패 시 적절한 처리
+                    if (xhr.status === 400) {
+                        alert(xhr.responseText); // 서버에서 전달한 오류 메시지 표시
+                    } else {
+                        console.error('Ajax 요청 실패:', xhr);
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 </html>

@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -43,7 +46,13 @@ public class UserController {
     }
 
 
+    //---------------------로그아웃--------------------//
+    @GetMapping("user/logout")
+    public ResponseEntity<String> logout(HttpSession session) {
+        session.removeAttribute("loggedIn");
 
+        return ResponseEntity.ok("로그아웃 되었습니다 ");
+    }
 
 
 
