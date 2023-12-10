@@ -51,10 +51,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" id="noticeInput" placeholder="관리자만 등록이 가능합니다.">
                                 <span class="input-group-btn">
-            <button class="btn btn-default" type="button">Send</button>
-          </span>
+        <button class="btn btn-default" type="button" id="sendNotice">전송</button>
+    </span>
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,45 @@
     </div>
 </div>
 
+
 <script>
+    // 채팅 공지사항 등록 스크립트
+    $(document).ready(function () {
+        // 공지사항 버튼 클릭 시
+        $("#sendNotice").click(function (e) {
+            e.preventDefault(); // 기본 동작 방지 (페이지 이동)
+            var content = $("#noticeInput").val();
+
+            var formData = new FormData();
+            formData.append("noticeText", content);
+
+            $.ajax({
+                type: 'POST',
+                url: '/notice/create',
+                data: formData, // 여기서 세미콜론(;)을 쉼표(,)로 수정
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    // 성공 시 팝업 창에 결과 표시
+                    alert(data);
+                    location.reload();
+                },
+                error: function (xhr) {
+                    // 실패 시 적절한 처리
+                    if (xhr.status === 400) {
+                        alert(xhr.responseText); // 서버에서 전달한 오류 메시지 표시
+                    } else {
+                        console.error('Ajax 요청 실패:', xhr);
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+
+<script>
+// 근무시작 스크립트
     $(document).ready(function () {
         // 근무 시작 버튼 클릭 시
         $('#startWork').click(function (e) {
@@ -93,6 +131,7 @@
 </script>
 
 <script>
+//근무종료 스크립트
     $(document).ready(function () {
         // 근무 end 버튼 클릭 시
         $('#endWork').click(function (e) {

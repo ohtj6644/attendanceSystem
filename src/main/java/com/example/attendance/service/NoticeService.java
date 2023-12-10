@@ -17,10 +17,10 @@ public class NoticeService {
     private final NoticeRepository noticeRepository;
 
 
-    public void noticeCreate(FormData formData, SiteUser user){
+    public void noticeCreate(String formData, SiteUser user){
         Notice notice=new Notice();
         notice.setCreateDate(LocalDateTime.now());
-        notice.setContent(formData.getContentType());
+        notice.setContent(formData);
         notice.setAuthor(user);
 
         this.noticeRepository.save(notice);

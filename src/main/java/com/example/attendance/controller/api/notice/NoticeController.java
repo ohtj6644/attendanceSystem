@@ -4,13 +4,12 @@ package com.example.attendance.controller.api.notice;
 import com.example.attendance.entity.SiteUser;
 import com.example.attendance.service.NoticeService;
 import com.example.attendance.service.UserService;
+import com.example.attendance.user.UserRole;
 import feign.form.FormData;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -23,11 +22,14 @@ public class NoticeController {
     private final UserService userService;
 
 
-    @PostMapping("/admin/notice/create")
-    public ResponseEntity<String> noticeCreate(@RequestBody FormData formData, Principal principal){
+    @PostMapping("/notice/create")
+    public ResponseEntity<String> noticeCreate(@RequestParam("noticeText") String formData, Principal principal){
 
         SiteUser user= this.userService.findUser(principal.getName());
 
+        if (user.getRole()!= UserRole.ADMIN){
+            return ResponseEntity.badRequest().body("권한이 없습니다.");
+        }
         this.noticeService.noticeCreate(formData,user);
 
        return ResponseEntity.ok( "등록 완료 ");
