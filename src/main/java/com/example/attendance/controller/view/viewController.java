@@ -89,6 +89,7 @@ public class viewController {
 
         model.addAttribute("noticeList",noticeList);
         model.addAttribute("todayState",todayState);
+        model.addAttribute("user",user);
 
 
         return "main_Page";

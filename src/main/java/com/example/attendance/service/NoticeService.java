@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +27,12 @@ public class NoticeService {
         this.noticeRepository.save(notice);
 
 
+    }
+
+    public void noticeDelete (String id){
+
+        Optional<Notice> notice = this.noticeRepository.findById(id);
+        this.noticeRepository.delete(notice.get());
     }
 
     public List<Notice> getList(){

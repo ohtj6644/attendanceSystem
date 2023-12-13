@@ -35,4 +35,16 @@ public class NoticeController {
        return ResponseEntity.ok( "등록 완료 ");
     }
 
+
+    @GetMapping("/norice/delete/{id}")
+    public ResponseEntity<String> noticeDelete(@PathVariable("id")String id,Principal principal){
+        SiteUser user= this.userService.findUser(principal.getName());
+        if (user.getRole()!= UserRole.ADMIN){
+            return ResponseEntity.badRequest().body("권한이 없습니다.");
+        }
+        this.noticeService.noticeDelete(id);
+
+        return ResponseEntity.ok( "삭제 완료 ");
+    }
+
 }
