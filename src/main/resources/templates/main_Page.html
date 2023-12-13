@@ -41,6 +41,9 @@
                             <h4 class="message-name" th:text="${notice.author.username}">Mr. Minion</h4>
                         </div>
                         <div class="col-xs-4 col-md-6 text-right message-date" th:text="${notice.createDate}">Date here</div>
+                        <a th:href="@{|/notice/modify/${notice.id}|}">
+                            <button class="modify">수정</button>
+                        </a>
                     </div>
                     <div class="row message-text" th:text="${notice.content}">
                         내용

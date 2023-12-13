@@ -15,8 +15,11 @@
     <div class="row">
         <header>
             <a th:href="@{/}" class="mainLogo"><img src="https://i.postimg.cc/sXkq1bdm/2-removebg-preview.png" ></a>
-            <button class="header__menu__link"  id="logout" sec:authorize="isAuthenticated()" type="button"
-                >로그아웃</button>
+            <a th:href="@{/user/logout}">
+                <button class="header__menu__link"  id="logout" sec:authorize="isAuthenticated()" type="button">
+                    로그아웃
+                </button>
+            </a>
         </header>
     </div>
     <nav id="sideNavParent" class="pdsa-sn-wrapper">
