@@ -47,7 +47,7 @@
                         </a>
                         <button type="button" class="btn btn-sm btn-outline-secondary delete-notice-btn"
                                 sec:authorize="isAuthenticated()"  th:if="${user.username == notice.author.username}" id="deletenotice"
-                                value="${notice.id}">삭제
+                                th:value="${notice.id}">삭제
                         </button>
                     </div>
                     <div class="row message-text" th:text="${notice.content}">
@@ -111,10 +111,10 @@
 <script>
     // 채팅 공지사항 삭제 스크립트
     $(document).ready(function () {
-        // 공지사항 버튼 클릭 시
+        // 공지사항 삭제버튼 클릭 시
         $("#deletenotice").click(function (e) {
             e.preventDefault(); // 기본 동작 방지 (페이지 이동)
-            var noticeId = $(this).val();
+            var noticeId = $("#deletenotice").val();
 
             $.ajax({
                 type: 'GET',
