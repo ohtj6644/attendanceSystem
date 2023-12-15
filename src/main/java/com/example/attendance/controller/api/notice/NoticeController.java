@@ -21,7 +21,7 @@ public class NoticeController {
     private final NoticeService noticeService;
     private final UserService userService;
 
-
+    //-------------공지사항 추가----------------//
     @PostMapping("/notice/create")
     public ResponseEntity<String> noticeCreate(@RequestParam("noticeText") String formData, Principal principal){
 
@@ -36,6 +36,7 @@ public class NoticeController {
     }
 
 
+    //-------------공지사항 삭제----------------//
     @GetMapping("/notice/delete/{id}")
     public ResponseEntity<String> noticeDelete(@PathVariable("id")String id,Principal principal){
         SiteUser user= this.userService.findUser(principal.getName());
@@ -47,5 +48,19 @@ public class NoticeController {
         }
 
     }
+
+    //-------------공지사항 수정----------------//
+    @PutMapping("/notice/modif/{id}")
+    public ResponseEntity<String> noticeModify(@PathVariable("id")String id, Principal principal ,@RequestBody String newContent ){
+
+        SiteUser user= this.userService.findUser(principal.getName());
+        if (user.getRole()!= UserRole.ADMIN){
+            return ResponseEntity.badRequest().body("권한이 없습니다.");
+        }else {
+            this.noticeService.noticeModify(id,newContent);
+            return ResponseEntity.ok( "수정 완료 ");
+        }
+    }
+
 
 }

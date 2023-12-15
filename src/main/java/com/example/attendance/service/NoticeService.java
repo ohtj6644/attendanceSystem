@@ -35,6 +35,16 @@ public class NoticeService {
         this.noticeRepository.delete(notice.get());
     }
 
+
+    public void  noticeModify(String id, String content){
+        Optional<Notice> tmp=this.noticeRepository.findById(id);
+        Notice notice = tmp.get();
+        notice.setContent(content);
+        this.noticeRepository.save(notice);
+    }
+
+
+
     public List<Notice> getList(){
 
         return this.noticeRepository.findAll();
