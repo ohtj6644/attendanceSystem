@@ -53,7 +53,7 @@
                     <div class="row message-text" th:text="${notice.content}">
                         내용
                     </div>
-                    <div class="input-group" id="" style="display: none">
+                    <div class="input-group" id="modifyForm" style="display: none">
                         <input type="text" class="form-control" id="noticemodifyInput" placeholder="수정할 내용을 입력해주세요." >
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button" id="sendModifyNotice" th:value="${notice.id}">수정학인</button>
@@ -153,8 +153,7 @@
             var noticeId = $("#sendModifyNotice").val();
             $.ajax({
                 type: 'PUT',
-                url: '/notice/modif/' + noticeId,
-                data: modifyContent,
+                url: '/notice/modif/' + noticeId + '?content=' + modifyContent,
                 success: function (data) {
                     // 성공 시 팝업 창에 결과 표시
                     alert(data);
@@ -173,7 +172,28 @@
         });
     });
 </script>
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var modifyButton = document.getElementById('modifynotice'); // 수정 버튼
+            var modifyForm = document.getElementById('modifyForm'); // 수정 폼
+            var modifyInput = document.getElementById('noticemodifyInput'); // 수정 내용 입력란
+            var sendModifyButton = document.getElementById('sendModifyNotice'); // 수정 확인 버튼
 
+            // 수정 버튼 클릭 시 이벤트 처리
+            modifyButton.addEventListener('click', function () {
+                // 클릭 시 폼의 display 속성 변경
+                modifyForm.style.display = 'block';
+            });
+
+            // 수정 확인 버튼 클릭 시 이벤트 처리 (여기에 필요한 로직 추가)
+            sendModifyButton.addEventListener('click', function () {
+                // 수정 확인 버튼을 클릭했을 때의 동작을 여기에 추가
+                // 수정한 내용을 서버로 전송하는 등의 동작을 수행할 수 있음
+                // 수정 폼을 다시 숨기는 등의 동작도 추가 가능
+                modifyForm.style.display = 'none';
+            });
+        });
+    </script>
 
 
 
