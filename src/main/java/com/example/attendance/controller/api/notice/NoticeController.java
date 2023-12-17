@@ -51,7 +51,7 @@ public class NoticeController {
 
     //-------------공지사항 수정----------------//
     @PutMapping("/notice/modif/{id}")
-    public ResponseEntity<String> noticeModify(@PathVariable("id")String id, Principal principal ,@RequestBody String newContent ){
+    public ResponseEntity<String> noticeModify(@PathVariable("id")String id, Principal principal ,@RequestParam(value = "content") String newContent ){
 
         SiteUser user= this.userService.findUser(principal.getName());
         if (user.getRole()!= UserRole.ADMIN){
