@@ -111,7 +111,10 @@ public class viewController {
         model.addAttribute("attendanceSize",attendanceSize);
         //한달동안 근무한 날짜 수 반환
 
-        return "Month_Attendance";
+        return "My_Attendance";
     }
+
+
+
 
 }

@@ -1,26 +1,125 @@
-    $(document).ready(function () {
-        // 근무 시작 버튼 클릭 시
-        $('#startWork').click(function (e) {
-            e.preventDefault(); // 기본 동작 방지 (페이지 이동)
 
-            // Ajax 요청
-            $.ajax({
-                type: 'GET',
-                url: '/user/startWork',
-                success: function (data) {
-                    // 성공 시 팝업 창에 결과 표시
-                    var popup = window.open('', '_blank', 'width=400,height=200');
-                    popup.document.write('<html><head><title>근무 시작 결과</title></head><body>');
-                    popup.document.write('<h2>근무 시작 결과</h2>');
-                    popup.document.write('<p>' + data + '</p>');
-                    popup.document.write('<button onclick="window.close();">닫기</button>');
-                    popup.document.write('</body></html>');
-                },
-                error: function (error) {
-                    // 실패 시 적절한 처리
-                    console.error('Ajax 요청 실패:', error);
+//로그아웃
+
+$(document).ready(function () {
+    // 로그아웃 버튼 클릭 시
+    $('#logout').click(function (e) {
+        e.preventDefault(); // 기본 동작 방지 (페이지 이동)
+
+        // Ajax 요청
+        $.ajax({
+            type: 'GET',
+            url: '/user/logout',
+            success: function (data) {
+                // 성공 시 팝업 창에 결과 표시
+                alert("로그아웃 되었습니다.");
+                location.reload();
+            },
+            error: function (xhr) {
+                // 실패 시 적절한 처리
+                if (xhr.status === 400) {
+                    alert(xhr.responseText); // 서버에서 전달한 오류 메시지 표시
+                } else {
+                    console.error('Ajax 요청 실패:', xhr);
                 }
-            });
+            }
         });
     });
+});
+
+
+// 근무시작 스크립트
+$(document).ready(function () {
+    // 근무 시작 버튼 클릭 시
+    $('#startWork').click(function (e) {
+        e.preventDefault(); // 기본 동작 방지 (페이지 이동)
+
+        // Ajax 요청
+        $.ajax({
+            type: 'GET',
+            url: '/user/startWork',
+            success: function (data) {
+                // 성공 시 팝업 창에 결과 표시
+                alert(data);
+                location.reload();
+            },
+            error: function (xhr) {
+                // 실패 시 적절한 처리
+                if (xhr.status === 400) {
+                    alert(xhr.responseText); // 서버에서 전달한 오류 메시지 표시
+                } else {
+                    console.error('Ajax 요청 실패:', xhr);
+                }
+            }
+        });
+    });
+});
+
+//근무종료 스크립트
+$(document).ready(function () {
+    // 근무 end 버튼 클릭 시
+    $('#endWork').click(function (e) {
+        e.preventDefault(); // 기본 동작 방지 (페이지 이동)
+
+        // Ajax 요청
+        $.ajax({
+            type: 'GET',
+            url: '/user/endWork',
+            success: function (data) {
+                // 성공 시 팝업 창에 결과 표시
+                alert(data);
+                location.reload();
+            },
+            error: function (xhr) {
+                // 실패 시 적절한 처리
+                if (xhr.status === 400) {
+                    alert(xhr.responseText); // 서버에서 전달한 오류 메시지 표시
+                } else {
+                    console.error('Ajax 요청 실패:', xhr);
+                }
+            }
+        });
+    });
+});
+
+// Thymeleaf를 사용하여 Java에서 전달한 startWorkTime 값을 가져옴
+var startWorkTime = new Date(/*[[${startWorkTime}]]*/ null);
+
+// 타이머 시작 함수
+function startTimer() {
+    var timerElement = document.getElementById('timer');
+
+    // 타이머 갱신 함수
+    function updateTimer() {
+        // 현재 시간을 가져옴
+        var currentTime = new Date();
+
+        // 경과 시간 계산 (밀리초)
+        var elapsedTimeInMilliseconds = currentTime - startWorkTime;
+
+        // 밀리초를 시간, 분, 초로 변환
+        var seconds = Math.floor(elapsedTimeInMilliseconds / 1000);
+        var minutes = Math.floor(seconds / 60);
+        var hours = Math.floor(minutes / 60);
+
+        // 남은 시간 계산
+        var remainingSeconds = seconds % 60;
+        var remainingMinutes = minutes % 60;
+
+        // 경과 시간을 화면에 표시
+        timerElement.innerHTML = '근무시간 : ' + hours + '시간 ' + remainingMinutes + '분 ' + remainingSeconds + '초';
+
+        // 1초마다 업데이트
+        setTimeout(updateTimer, 1000);
+    }
+
+    // 타이머 시작
+    updateTimer();
+}
+
+// 페이지 로드 후 타이머 시작
+window.onload = startTimer;
+
+
+
 

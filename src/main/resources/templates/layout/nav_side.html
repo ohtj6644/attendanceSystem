@@ -32,7 +32,7 @@
                 <a  class="btn btn-success" id="endWork">■ 근무종료</a>
             </li>
             <li>
-                <a href="Default.html">
+                <a th:href="@{/}">
                     <span class="hidden-xs">홈 피드</span>
                     <i class="glyphicon glyphicon-home visible-xs"></i>
                 </a>
@@ -72,7 +72,7 @@
                 <div class="hidden-xs">
                     <ul id="ulPlaylists" class="collapse" data-parent="#sideNavParent">
                         <li>
-                            <a href="#">한달간 근무내역</a>
+                            <a th:href="@{/user/monthAttendance/}">한달간 근무내역</a>
                         </li>
                         <li>
                             <a href="#">외근 신청</a>
@@ -100,33 +100,6 @@
 </div>
 
 
-<script>
-    $(document).ready(function () {
-        // 로그아웃 버튼 클릭 시
-        $('#logout').click(function (e) {
-            e.preventDefault(); // 기본 동작 방지 (페이지 이동)
-
-            // Ajax 요청
-            $.ajax({
-                type: 'GET',
-                url: '/user/logout',
-                success: function (data) {
-                    // 성공 시 팝업 창에 결과 표시
-                    alert(data);
-                    location.reload();
-                },
-                error: function (xhr) {
-                    // 실패 시 적절한 처리
-                    if (xhr.status === 400) {
-                        alert(xhr.responseText); // 서버에서 전달한 오류 메시지 표시
-                    } else {
-                        console.error('Ajax 요청 실패:', xhr);
-                    }
-                }
-            });
-        });
-    });
-</script>
 
 </body>
 </html>
