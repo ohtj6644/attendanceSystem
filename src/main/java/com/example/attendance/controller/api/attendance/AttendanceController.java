@@ -7,6 +7,7 @@ import com.example.attendance.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
@@ -33,7 +34,7 @@ public class AttendanceController {
     }
 
     // ---------------------근무 종료-----------------------//
-    @GetMapping("/user/endWork")
+    @PutMapping("/user/endWork")
     public ResponseEntity<String> endWork(Principal principal){
         SiteUser user=userService.findUser(principal.getName());
 

@@ -63,7 +63,7 @@ $(document).ready(function () {
 
         // Ajax 요청
         $.ajax({
-            type: 'GET',
+            type: 'PUT',
             url: '/user/endWork',
             success: function (data) {
                 // 성공 시 팝업 창에 결과 표시
