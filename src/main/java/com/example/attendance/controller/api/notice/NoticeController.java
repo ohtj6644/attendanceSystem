@@ -37,7 +37,7 @@ public class NoticeController {
 
 
     //-------------공지사항 삭제----------------//
-    @GetMapping("/notice/delete/{id}")
+    @DeleteMapping("/notice/delete/{id}")
     public ResponseEntity<String> noticeDelete(@PathVariable("id")String id,Principal principal){
         SiteUser user= this.userService.findUser(principal.getName());
         if (user.getRole()!= UserRole.ADMIN){

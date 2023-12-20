@@ -35,12 +35,17 @@ $(document).ready(function () {
 // 채팅 공지사항 삭제 스크립트
 $(document).ready(function () {
     // 공지사항 삭제버튼 클릭 시
-    $("#deletenotice").click(function (e) {
+    $(".delete-notice-btn").click(function (e) {
         e.preventDefault(); // 기본 동작 방지 (페이지 이동)
-        var noticeId = $("#deletenotice").val();
+        // var noticeId = $("#deletenotice").val();
+        // 수정 버튼이 속한 부모 요소인 .message-candidate를 찾습니다.
+        var messageCandidate = $(this).closest('.message-candidate');
+
+// 해당 부모 요소 내에서 sendModifyNotice의 값을 가져옵니다.
+        var noticeId = messageCandidate.find('.delete-notice-btn').val();
 
         $.ajax({
-            type: 'GET',
+            type: 'DELETE',
             url: '/notice/delete/' + noticeId,
             success: function (data) {
                 // 성공 시 팝업 창에 결과 표시
