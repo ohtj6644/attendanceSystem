@@ -1,6 +1,7 @@
 package com.example.attendance.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.cglib.core.Local;
 import org.springframework.data.annotation.Id;
@@ -17,6 +18,7 @@ import java.time.LocalTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties("site_User")
 public class Attendance {
     // 근태 엔티티 //
 

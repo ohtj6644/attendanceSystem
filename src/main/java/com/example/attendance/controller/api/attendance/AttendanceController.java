@@ -7,6 +7,7 @@ import com.example.attendance.service.AttendanceService;
 import com.example.attendance.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,11 +58,15 @@ public class AttendanceController {
 
 
     @PostMapping("/user/monthAttendance/")
-    public ResponseEntity<Page<Attendance>> getSearchAttendance(@RequestParam(value = "startDate")LocalDateTime startDate , @RequestParam(value = "endDate")LocalDateTime endDate, @RequestParam(value = "page" , defaultValue = "0")int page, Principal principal){
+    public ResponseEntity<Page<Attendance>> getSearchAttendance(
+            @RequestParam(value = "startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam(value = "endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            Principal principal) {
 
-        SiteUser user=userService.findUser(principal.getName());
-        Page<Attendance> AttendanceList = this.attendanceService.getSearchAttendance(startDate, endDate,user,page);
-        return ResponseEntity.ok(AttendanceList);
+        SiteUser user = userService.findUser(principal.getName());
+        Page<Attendance> attendanceList = this.attendanceService.getSearchAttendance(startDate, endDate, user, page);
+        return ResponseEntity.ok(attendanceList);
     }
 
 

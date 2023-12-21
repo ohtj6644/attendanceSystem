@@ -3,6 +3,8 @@ package com.example.attendance.entity;
 
 import com.example.attendance.entity.Uuid;
 import com.example.attendance.user.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -20,6 +22,7 @@ import java.util.List;
 @Getter
 @Setter
 @Data
+@JsonIgnoreProperties("attendance")
 public class SiteUser {
 
     @Id
@@ -40,14 +43,16 @@ public class SiteUser {
     //회원 권한 (초기값 user 로 셋팅 )
 
     @DBRef
+    @JsonIgnore
     private Uuid Uuid_id;
     //고유번호
 
     @DBRef
+    @JsonIgnore
     private List<Attendance> attendances;
-    //근태
 
     @DBRef
+    @JsonIgnore
     private List<Notice> notices;
     //근태
 

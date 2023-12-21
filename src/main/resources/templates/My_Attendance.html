@@ -31,43 +31,44 @@
         <form id="attendanceForm" class="date_form">
             <div class="birthday">
                 <p>조회기간 :</p>
-                <input type="datetime-local" name="start">
+                <input type="datetime-local" name="startDate">
                 <p>~</p>
-                <input type="datetime-local" name="end">
+                <input type="datetime-local" name="endDate">
                 <button type="button" id="searchBtn" class="btn btn-success">조회하기</button>
             </div>
         </form>
     </div>
 </div>
 
+
 <!--아래 근무 리스트-->
-<table >
-    <thead>
-    <tr>
-        <th>근무시작시간</th>
-        <th>근무종료시간</th>
-        <th>근무시간 (분)</th>
-        <th>휴가사용여부</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- 전달받은  AttendanceList 가 있는 경우 아래 리스트 출력 -->
-    <th:if test="${AttendanceList != null and not #lists.isEmpty(AttendanceList)}">
-    <tr th:each="attendance : ${AttendanceList}">
-        <td th:text="${#temporals.format(attendance.startWorkTime, 'yyyy-MM-dd HH:mm')}"></td>
-        <td th:text="${#temporals.format(attendance.endWorkTime, 'yyyy-MM-dd HH:mm')}"></td>
-        <td th:text="${attendance.workTime}"></td>
-        <td th:text="${attendance.annual}"></td>
-    </tr>
-    </th:if>
-    <!-- 전달받은  AttendanceList 가 없는 경우 아래 문구 출력 -->
-    <th:unless test="${AttendanceList != null and not #lists.isEmpty(AttendanceList)}">
-        <tr>
-            <td colspan="4">해당 조회기간의 근무가 없습니다 </td>
-        </tr>
-    </th:unless>
-    </tbody>
-</table>
+<div class="container" style="margin-top: 50px;">
+    <div class="row text-center">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="date_list">
+                <table class="table table-bordered table-hover table-striped" style="background-color: #d9fbd9;">
+                    <thead>
+                    <tr>
+                        <th>근무시작시간</th>
+                        <th>근무종료시간</th>
+                        <th>근무시간 (분)</th>
+                        <th>휴가사용여부</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- 수정된 부분: 데이터가 있을 때와 없을 때를 나누지 않고, 바로 리스트 출력 -->
+                    <tr th:each="attendance : ${AttendanceList}">
+                        <td th:text="${#temporals.format(attendance.startWorkTime, 'yyyy-MM-dd HH:mm')}"></td>
+                        <td th:text="${#temporals.format(attendance.endWorkTime, 'yyyy-MM-dd HH:mm')}"></td>
+                        <td th:text="${attendance.workTime}"></td>
+                        <td th:text="${attendance.annual}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

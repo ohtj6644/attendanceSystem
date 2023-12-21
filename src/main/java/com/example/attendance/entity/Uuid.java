@@ -17,6 +17,7 @@ public class Uuid {
 
 
     @Id
+
     private String id;
     //고유번호
 
