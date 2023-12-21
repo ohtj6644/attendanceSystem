@@ -100,16 +100,32 @@ public class viewController {
     //---------------------- 한달 간 근무 내역 --------------------------//
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/user/monthAttendance/")
-    public String getMonthAttendance(Model model, Principal principal, @RequestParam(value = "month",defaultValue = "0") int month,
-                                     @RequestParam(value = "year",defaultValue = "0") int year){
+    public String getMonthAttendance(Model model, Principal principal){
         SiteUser user= this.userService.findUser(principal.getName());
-        List<Attendance> attendances = attendanceService.getMonthAttendance(user , month , year);
-        int attendanceSize= attendances.size();
+//        List<Attendance> attendances = attendanceService.getMonthAttendance(user , month , year);
+//        int attendanceSize= attendances.size();
 
-        model.addAttribute("attendances",attendances);
-        //한달동안 근무한 내역 리스트로 반환
-        model.addAttribute("attendanceSize",attendanceSize);
-        //한달동안 근무한 날짜 수 반환
+
+        boolean todayState ;
+        if(attendanceService.getNowAttendance(user)==null){
+            todayState = false;
+        }else if ((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()== null) ) {
+            todayState = true;
+            model.addAttribute("startWorkTime",attendanceService.getNowAttendance(user).getStartWorkTime());
+
+        }else if((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()!= null)){
+            todayState = false;
+        }else {
+            todayState = false;
+        }
+
+        model.addAttribute("todayState",todayState);
+        model.addAttribute("user",user);
+
+//        model.addAttribute("attendances",attendances);
+//        //한달동안 근무한 내역 리스트로 반환
+//        model.addAttribute("attendanceSize",attendanceSize);
+//        //한달동안 근무한 날짜 수 반환
 
         return "My_Attendance";
     }

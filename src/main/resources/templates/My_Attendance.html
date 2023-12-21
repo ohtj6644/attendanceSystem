@@ -5,6 +5,7 @@
     <title>나의 근무내역</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/nav_side.css"/>
+    <link rel="stylesheet" href="/css/my_attendance.css"/>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap 3 JS -->
@@ -22,7 +23,22 @@
 <script src="/js/nav_side.js"></script>
 
 
-<!-- 아래부터 근무내역 작업 예정 -->
+<!-- 근무내역 조회폼 -->
+<div class="container">
+    <div class="date_content">
+        <div class="date_title"><p>근무내역 기간별 조회</p></div>
+        <form action="/user/monthAttendance/" method="POST" class="date_form">
+            <div class="birthday">
+                <p>조회기간 :</p>
+                <input type="datetime-local" name="start">
+                <p>~</p>
+                <input type="datetime-local" name="end">
+                <button type="submit" class="btn btn-success">조회하기</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!--아래 근무 리스트-->
 
 
 </body>

@@ -91,10 +91,10 @@ header a:hover {
     color: white;
 }
 
-.pdsa-sn-wrapper ul .pdsa-sn-brand a:hover {
-    color: lightblue;
-    background: none;
-}
+/*.pdsa-sn-wrapper ul .pdsa-sn-brand a:hover {*/
+/*    color: lightblue;*/
+/*    background: none;*/
+/*}*/
 
 /* Style for 2nd level */
 .pdsa-sn-wrapper ul li ul {
