@@ -97,13 +97,11 @@ public class viewController {
 
 
 
-    //---------------------- 한달 간 근무 내역 --------------------------//
+    //---------------------- 나의 근무 내역 --------------------------//
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/user/monthAttendance/")
     public String getMonthAttendance(Model model, Principal principal){
         SiteUser user= this.userService.findUser(principal.getName());
-//        List<Attendance> attendances = attendanceService.getMonthAttendance(user , month , year);
-//        int attendanceSize= attendances.size();
 
 
         boolean todayState ;
@@ -122,10 +120,6 @@ public class viewController {
         model.addAttribute("todayState",todayState);
         model.addAttribute("user",user);
 
-//        model.addAttribute("attendances",attendances);
-//        //한달동안 근무한 내역 리스트로 반환
-//        model.addAttribute("attendanceSize",attendanceSize);
-//        //한달동안 근무한 날짜 수 반환
 
         return "My_Attendance";
     }

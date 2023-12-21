@@ -1,16 +1,18 @@
 package com.example.attendance.controller.api.attendance;
 
 
+import com.example.attendance.entity.Attendance;
 import com.example.attendance.entity.SiteUser;
 import com.example.attendance.service.AttendanceService;
 import com.example.attendance.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -53,6 +55,14 @@ public class AttendanceController {
 
     }
 
+
+    @PostMapping("/user/monthAttendance/")
+    public ResponseEntity<Page<Attendance>> getSearchAttendance(@RequestParam(value = "startDate")LocalDateTime startDate , @RequestParam(value = "endDate")LocalDateTime endDate, @RequestParam(value = "page" , defaultValue = "0")int page, Principal principal){
+
+        SiteUser user=userService.findUser(principal.getName());
+        Page<Attendance> AttendanceList = this.attendanceService.getSearchAttendance(startDate, endDate,user,page);
+        return ResponseEntity.ok(AttendanceList);
+    }
 
 
 

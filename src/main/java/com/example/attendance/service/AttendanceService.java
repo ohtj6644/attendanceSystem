@@ -9,10 +9,14 @@ import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.apache.tomcat.jni.Local;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
 import java.time.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,6 +91,15 @@ public class AttendanceService {
     public void deleteAttendance(Attendance attendance){
         this.attenRepo.delete(attendance);
 
+    }
+
+
+    //----------------------유저 기간별 근무 조회  ------------------------------------------------//
+    public Page<Attendance> getSearchAttendance(LocalDateTime startDate, LocalDateTime endDate,SiteUser user,int page){
+        List<Sort.Order> sorts=new ArrayList<>();
+        sorts.add(Sort.Order.desc("startWorkTime"));
+        Pageable pageable = PageRequest.of(page,30,Sort.by(sorts));
+        return this.attenRepo.findByStartWorkTimeBetweenAndUser(startDate, endDate, user, pageable);
     }
 
 
