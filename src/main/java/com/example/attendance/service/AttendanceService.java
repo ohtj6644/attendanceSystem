@@ -95,7 +95,7 @@ public class AttendanceService {
 
 
     //----------------------유저 기간별 근무 조회  ------------------------------------------------//
-    public Page<Attendance> getSearchAttendance(LocalDateTime startDate, LocalDateTime endDate,SiteUser user,int page){
+    public Page<Attendance> getSearchAttendance(LocalDate startDate, LocalDate endDate,SiteUser user,int page){
         List<Sort.Order> sorts=new ArrayList<>();
         sorts.add(Sort.Order.desc("startWorkTime"));
         Pageable pageable = PageRequest.of(page,30,Sort.by(sorts));

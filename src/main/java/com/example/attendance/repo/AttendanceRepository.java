@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -23,5 +24,5 @@ public interface AttendanceRepository extends MongoRepository<Attendance, String
 
     List<Attendance> findByStartWorkTimeBetween(LocalDateTime start, LocalDateTime end);
 
-    Page<Attendance> findByStartWorkTimeBetweenAndUser(LocalDateTime startDate, LocalDateTime endDate, SiteUser user, Pageable pageable);
+    Page<Attendance> findByStartWorkTimeBetweenAndUser(LocalDate startDate, LocalDate endDate, SiteUser user, Pageable pageable);
 }

@@ -12,8 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -59,16 +62,24 @@ public class AttendanceController {
 
     @PostMapping("/user/monthAttendance/")
     public ResponseEntity<Page<Attendance>> getSearchAttendance(
-            @RequestParam(value = "startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
-            @RequestParam(value = "endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
-            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestBody Map<String, Object> requestBody,
             Principal principal) {
 
+        String startDateString = (String) requestBody.get("startDate");
+        String endDateString = (String) requestBody.get("endDate");
+
+        System.out.println("========="+startDateString);
+        System.out.println("========="+endDateString);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+
+        LocalDate startDate = LocalDate.parse(startDateString,formatter);
+        LocalDate endDate = LocalDate.parse(endDateString,formatter);
+
         SiteUser user = userService.findUser(principal.getName());
-        Page<Attendance> attendanceList = this.attendanceService.getSearchAttendance(startDate, endDate, user, page);
+        Page<Attendance> attendanceList = this.attendanceService.getSearchAttendance(startDate, endDate, user, 0);
         return ResponseEntity.ok(attendanceList);
     }
-
 
 
 
