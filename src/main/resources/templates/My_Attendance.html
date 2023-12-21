@@ -21,24 +21,54 @@
 <!--네비 , 사이드바 html/js  가져오기 -->
 <div th:include="layout/nav_side :: containerFragment"></div>
 <script src="/js/nav_side.js"></script>
+<script src="/js/my_attendance.js"></script>
 
 
 <!-- 근무내역 조회폼 -->
 <div class="container">
     <div class="date_content">
         <div class="date_title"><p>근무내역 기간별 조회</p></div>
-        <form action="/user/monthAttendance/" method="POST" class="date_form">
+        <form id="attendanceForm" class="date_form">
             <div class="birthday">
                 <p>조회기간 :</p>
                 <input type="datetime-local" name="start">
                 <p>~</p>
                 <input type="datetime-local" name="end">
-                <button type="submit" class="btn btn-success">조회하기</button>
+                <button type="button" id="searchBtn" class="btn btn-success">조회하기</button>
             </div>
         </form>
     </div>
 </div>
+
 <!--아래 근무 리스트-->
+<table >
+    <thead>
+    <tr>
+        <th>근무시작시간</th>
+        <th>근무종료시간</th>
+        <th>근무시간 (분)</th>
+        <th>휴가사용여부</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 전달받은  AttendanceList 가 있는 경우 아래 리스트 출력 -->
+    <th:if test="${AttendanceList != null and not #lists.isEmpty(AttendanceList)}">
+    <tr th:each="attendance : ${AttendanceList}">
+        <td th:text="${#temporals.format(attendance.startWorkTime, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${#temporals.format(attendance.endWorkTime, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${attendance.workTime}"></td>
+        <td th:text="${attendance.annual}"></td>
+    </tr>
+    </th:if>
+    <!-- 전달받은  AttendanceList 가 없는 경우 아래 문구 출력 -->
+    <th:unless test="${AttendanceList != null and not #lists.isEmpty(AttendanceList)}">
+        <tr>
+            <td colspan="4">해당 조회기간의 근무가 없습니다 </td>
+        </tr>
+    </th:unless>
+    </tbody>
+</table>
+
 
 
 </body>
