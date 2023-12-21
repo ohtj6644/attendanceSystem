@@ -246,5 +246,13 @@
   
 
 - [근무리스트 리스트화면 프론트엔드/백엔드 연동 ]_otj
-  
+  1. AttendanceController > getSearchAttendance메서드에서 
+     LocalDateTime 으로 변환하여 찾는부분에서 오류발생하여 
+     js 수정 , Js에서 받은 데이터를 'LocalDate' 로 변환 후
+     LocalDate 기준 기간으로 Repository에서 가져오는 걸로 로직 수정.
+     
+  2. 화면 기간조회 선택창 time 삭제하여 날짜만 선택하게 변경 필요.
+     
+  3. 근무시간타이머 에러 수정필요. ★★★★★★★★
+     타이머 시간이 이상하게나옴 / 타이머 근무시작 후 늦게나옴.
   
