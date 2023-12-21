@@ -59,7 +59,7 @@ public class AttendanceController {
 
     }
 
-
+    // ---------------------근무 조회 -----------------------//
     @PostMapping("/user/monthAttendance/")
     public ResponseEntity<Page<Attendance>> getSearchAttendance(
             @RequestBody Map<String, Object> requestBody,
@@ -67,17 +67,21 @@ public class AttendanceController {
 
         String startDateString = (String) requestBody.get("startDate");
         String endDateString = (String) requestBody.get("endDate");
+        // Js 에서 받은 데이터를 String 으로 변환
 
         System.out.println("========="+startDateString);
         System.out.println("========="+endDateString);
+        // 받은 데이터 정상여부 확인하려고 데이터 출력 만듬
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-
         LocalDate startDate = LocalDate.parse(startDateString,formatter);
         LocalDate endDate = LocalDate.parse(endDateString,formatter);
+        //fomatter 를 이용하여 받은 String 값 LocalDate 로 변환.
 
         SiteUser user = userService.findUser(principal.getName());
+        //접속자정보로 유저정보 검색
         Page<Attendance> attendanceList = this.attendanceService.getSearchAttendance(startDate, endDate, user, 0);
+        // 유저정보 , 검색기간 , 페이지 수 를 서비스로 넘겨서 해당 정보에 맞는 근무리스트를 Page 로 가져옴
         return ResponseEntity.ok(attendanceList);
     }
 

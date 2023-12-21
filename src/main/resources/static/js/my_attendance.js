@@ -3,6 +3,7 @@ $(document).ready(function () {
     $("#searchBtn").on("click", function () {
         var startDate = $("#startDate").val();
         var endDate = $("#endDate").val();
+        //선택했던 조회기간 데이터 가져오기.
 
         // 서버에 AJAX POST 요청 보내기
         $.ajax({
@@ -11,13 +12,15 @@ $(document).ready(function () {
             data: JSON.stringify({
                 startDate: startDate,
                 endDate: endDate
+                // Json 형태로 서버에 보냄.
             }),
             contentType: "application/json; charset=utf-8",
         })
             .done(function (data) {
                 // 새로운 데이터로 테이블 본문 업데이트
                 updateTable(data);
-                alert(data);
+                //받아욘 Page 데이터를 updateTable 에 넘겨서 처리
+                alert("검색완료");
             })
             .fail(function (error) {
                 console.error("오류:", error);
@@ -31,25 +34,23 @@ $(document).ready(function () {
         tableBody.empty();
 
         if (page.content.length > 0) {
-            // 데이터가 있을 때 테이블에 행 추가
+            // 받아온 page 데이터가 있을 때 테이블에 행 추가
             $.each(page.content, function (index, attendance) {
                 var jsDate1 = new Date(attendance.startWorkTime);
+                var jsDate2 = new Date(attendance.endWorkTime);
 
-                // 날짜 및 시간을 원하는 형식으로 포맷팅
                 var startdDate = jsDate1.getFullYear() + " 년 " +
                     (jsDate1.getMonth() + 1) + "월 " +
                     jsDate1.getDate() + "일 " +
                     jsDate1.getHours() + "시 " +
                     jsDate1.getMinutes() + "분";
-                var jsDate2 = new Date(attendance.endWorkTime);
 
-                // 날짜 및 시간을 원하는 형식으로 포맷팅
                 var endDate = jsDate2.getFullYear() + " 년 " +
                     (jsDate2.getMonth() + 1) + "월 " +
                     jsDate2.getDate() + "일 " +
                     jsDate2.getHours() + "시 " +
                     jsDate2.getMinutes() + "분";
-
+                // 받아온 근무의 날짜 및 시간을 원하는 형식으로 포맷팅
 
 
                 var row = "<tr>" +
