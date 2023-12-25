@@ -26,7 +26,7 @@ public class UserService {
 
     //------------------------유저 생성 -----------------------//
 
-    public SiteUser newUser(String username, String password) {
+    public SiteUser newUser(String username, String password, String realName , LocalDateTime singupDate) {
         SiteUser user = new SiteUser();
         user.setUsername(username);
         if(username.equals("admin")){
@@ -36,7 +36,8 @@ public class UserService {
 
 
         user.setPassword(passwordEncoder.encode(password));
-        user.setSignupDate(LocalDateTime.now());
+        user.setSignupDate(singupDate);
+        user.setRealName(realName);
 
         Uuid uuid = new Uuid();
 

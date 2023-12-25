@@ -21,7 +21,7 @@ public class UserController {
 
 
     //---------------------------유저생성---------------------------////
-    @PostMapping("/signup")
+    @PostMapping("/admin/signup")
     public ResponseEntity<String> signupUser(@ModelAttribute("userCreateForm") UserCreateForm userCreateForm, BindingResult bindingResult) {
 
         // 유효성 검사 에러 처리
@@ -39,7 +39,7 @@ public class UserController {
         }
 
         // 유저 생성
-        SiteUser user = this.userService.newUser(userCreateForm.getUsername(), userCreateForm.getPassword1());
+        SiteUser user = this.userService.newUser(userCreateForm.getUsername(), userCreateForm.getPassword1(),userCreateForm.getRealName(),userCreateForm.getSignupDate());
 
         // JSON 응답 반환
         return ResponseEntity.ok("유저 생성 완료. 유저번호:" + user.getUuid());

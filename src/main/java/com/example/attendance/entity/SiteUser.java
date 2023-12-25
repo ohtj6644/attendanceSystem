@@ -35,6 +35,8 @@ public class SiteUser {
     private String password;
     //회원 비밀번호
 
+    private String realName;
+
     private LocalDateTime signupDate;
     //가입일시 (해당 데이터 기준으로 연차생성)
 
@@ -50,11 +52,12 @@ public class SiteUser {
     @DBRef
     @JsonIgnore
     private List<Attendance> attendances;
+    //근태
 
     @DBRef
     @JsonIgnore
     private List<Notice> notices;
-    //근태
+
 
     private Integer AnnualCount;
     //잔여 휴가 개수

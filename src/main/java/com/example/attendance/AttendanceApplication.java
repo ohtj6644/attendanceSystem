@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
+import java.time.LocalDateTime;
 
 
 @EnableFeignClients
@@ -33,7 +34,7 @@ public class AttendanceApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		if(userRepository.findByUsername("admin")==null){
-			this.userService.newUser("admin","1234");
+			this.userService.newUser("admin","1234","관리자", LocalDateTime.now());
 		}
 
 	}

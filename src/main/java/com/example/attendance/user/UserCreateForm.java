@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import org.springframework.boot.convert.DataSizeUnit;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 public class UserCreateForm {
@@ -13,6 +15,10 @@ public class UserCreateForm {
 
 
     private String username;
+
+    private String realName;
+
+    private LocalDateTime signupDate;
 
 
     private String password1;

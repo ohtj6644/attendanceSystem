@@ -33,13 +33,6 @@ public class viewController {
     private final AttendanceService attendanceService;
     private final NoticeService noticeService;
 
-    //----------------유저 회원가입 화면 반환 ------------------//
-    @GetMapping("/signup")
-    public String signUp(UserCreateForm userCreateForm){
-
-        return "sign_up";
-
-    }
 
     //-----------------유저 로그인 화면 반환---------------------//
     @GetMapping("/user/login")
