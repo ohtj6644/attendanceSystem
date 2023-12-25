@@ -20,7 +20,7 @@
                     로그아웃
                 </button>
             </a>
-            <a th:href="@{/admin/}" th:if="${user.role.name() != 'USER'}">
+            <a th:href="@{/admin/signup}" th:if="${user.role.name() != 'USER'}">
                 <button class="header__menu__link">
                     관리자화면
                 </button>

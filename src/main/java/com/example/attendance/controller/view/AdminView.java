@@ -19,15 +19,30 @@ public class AdminView {
 
     private final UserService userService;
     //----------------유저 회원가입 화면 반환 ------------------//
-    @GetMapping("/admin")
+    @GetMapping("/admin/signup")
     @PreAuthorize("isAuthenticated()")
-    public String signUp(UserCreateForm userCreateForm, Model model, Principal principal){
+    public String signUp( Model model, Principal principal){
+
+        SiteUser user = userService.findUser(principal.getName());
+
+        model.addAttribute("userCreateForm", new UserCreateForm());
+
+        model.addAttribute("user",user);
+
+        return "/admin/admin_main";
+
+    }
+
+    //----------------유저 구성원목록 화면 반환 ------------------//
+    @GetMapping("/admin/userlist")
+    @PreAuthorize("isAuthenticated()")
+    public String userList( Model model, Principal principal){
 
         SiteUser user = userService.findUser(principal.getName());
 
         model.addAttribute("user",user);
 
-        return "/admin/admin_main";
+        return "/admin/admin_user_list";
 
     }
 }

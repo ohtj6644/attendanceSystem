@@ -30,10 +30,8 @@
                 <input type="text" th:field="*{realName}" class="form-control" placeholder="실명" />
                 <input  type="text" th:field="*{signupDate}" class="form-control" placeholder="입사일 입력예시:20230101" >
                 <input type="password" th:field="*{password1}" class="form-control" placeholder="패스워드 입력" />
-                <input type="password" th:field="*{password2}" class="form-control" placeholder="패스워드 다시입력">
-
-
-                <input class="btn btn-success" onclick="this.style.backgroundColor = '#69c061';" type="submit" value="회원가입"/>
+                <input  type="password" th:field="*{password2}" class="form-control" placeholder="패스워드 다시입력">
+                <input id="signupBtn" class="btn btn-success" onclick="this.style.backgroundColor = '#69c061';" type="button" value="회원가입"/>
             </div>
 
         </form>
@@ -43,5 +41,6 @@
 
 
 <script src="/js/admin_nav.js"></script>
+<script src="/js/admin_main.js"></script>
 </body>
 </html>
