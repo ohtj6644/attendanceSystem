@@ -55,14 +55,28 @@
                         <th>휴가사용여부</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="attendanceBoard">
                     <!-- 수정된 부분: 데이터가 있을 때와 없을 때를 나누지 않고, 바로 리스트 출력 -->
-                    <tr th:each="attendance : ${AttendanceList}">
-                        <td th:text="${#temporals.format(attendance.startWorkTime, 'yyyy-MM-dd HH:mm')}"></td>
-                        <td th:text="${#temporals.format(attendance.endWorkTime, 'yyyy-MM-dd HH:mm')}"></td>
-                        <td th:text="${attendance.workTime}"></td>
-                        <td th:text="${attendance.annual}"></td>
+                    <tr >
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
                     </tr>
+                    </tbody>
+                </table>
+                <table class="table table-bordered table-hover table-striped" style="background-color: #d9fbd9;">
+                    <thead>
+                        <tr>
+                            <th>근무일 수</th>
+                            <th>총 근무 시간</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceCount">
+                        <tr>
+                            <td class="1"></td>
+                            <td class="2"></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
