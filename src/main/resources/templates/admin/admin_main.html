@@ -21,20 +21,23 @@
 </head>
 <body>
 <div th:include="layout/admin_nav_side :: containerFragment"></div>
-<form th:action="@{/signup}" th:object="${userCreateForm}" method="post" class="sign_up">
+<div id="content-wrapper">
+    <h4>구성원 추가</h4>
+        <form th:action="@{/admin/signup}" th:object="${userCreateForm}" method="post" class="sign_up">
 
-    <div class="signup">
-        <input type="text" th:field="*{username}" class="form-control" placeholder="회원ID" />
-        <input type="text" th:field="*{realName}" class="form-control" placeholder="실명" />
-        <input type="datetime-local" th:field="*{signupDate}" class="form-control" placeholder="입사일">
-        <input type="password" th:field="*{password1}" class="form-control" placeholder="PASSWORD" />
-        <input type="password" th:field="*{password2}" class="form-control" placeholder="RE-PASSWORD">
+            <div class="signup">
+                <input type="text" th:field="*{username}" class="form-control" placeholder="회원ID" />
+                <input type="text" th:field="*{realName}" class="form-control" placeholder="실명" />
+                <input  type="text" th:field="*{signupDate}" class="form-control" placeholder="입사일 입력예시:20230101" >
+                <input type="password" th:field="*{password1}" class="form-control" placeholder="패스워드 입력" />
+                <input type="password" th:field="*{password2}" class="form-control" placeholder="패스워드 다시입력">
 
 
-        <input onclick="this.style.backgroundColor = '#69c061';" type="submit" value="회원가입"/>
-    </div>
+                <input class="btn btn-success" onclick="this.style.backgroundColor = '#69c061';" type="submit" value="회원가입"/>
+            </div>
 
-</form>
+        </form>
+</div>
 
 
 

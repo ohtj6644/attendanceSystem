@@ -54,12 +54,12 @@
         </ul>
         <ul class='main-menu bottom'>
             <li>
-                <a href="#">
-                    <span class='glyphicon glyphicon-user'></span> #관리자이름
+                <a href="#" >
+                    <span class='glyphicon glyphicon-user'></span> <span th:text="${user.username}"></span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a th:href="@{/}">
                     <span class='glyphicon glyphicon-log-out'></span> 관리자화면 나가기
                 </a>
             </li>

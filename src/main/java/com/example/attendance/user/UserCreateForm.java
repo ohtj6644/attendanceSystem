@@ -18,7 +18,7 @@ public class UserCreateForm {
 
     private String realName;
 
-    private LocalDateTime signupDate;
+    private String signupDate;
 
 
     private String password1;
