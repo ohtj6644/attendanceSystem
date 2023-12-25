@@ -20,8 +20,8 @@
                     로그아웃
                 </button>
             </a>
-            <a th:href="@{/admin/}">
-                <button class="header__menu__link"  sec:authorize="isAuthenticated() and #authentication.getAuthorities().stream().anyMatch(a => a.authority == 'ROLE_ADMIN' or a.authority == 'ROLE_SUPER_ADMIN')">
+            <a th:href="@{/admin/}" th:if="${user.role.name() != 'USER'}">
+                <button class="header__menu__link">
                     관리자화면
                 </button>
             </a>
