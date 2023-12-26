@@ -45,7 +45,7 @@
       <td th:text="${users.signupDate}"></td>
       <td th:text="${(users.AnnualCount ?: 0) + (users.YearAnnalCount ?: 0)}"></td>
       <td th:text="${users.role.name()}"></td>
-      <td ><button th:if="${users.role.name() != 'USER'}">관리자 회수 </button><button th:if="${users.role.name() == 'USER'}">관리자 부여 </button></td>
+      <td ><button id="admin_minus_btn" class="btn btn-success" th:if="${users.role.name() != 'USER'}">관리자 회수 </button><button id="admin_plus_btn" class="btn btn-success" th:if="${users.role.name() == 'USER'}">관리자 부여 </button></td>
     </tr>
     </tbody>
   </table>
@@ -80,5 +80,6 @@
 
 
 <script src="/js/admin_nav.js"></script>
+<script src="/js/admin_user_list.js"></script>
 </body>
 </html>
