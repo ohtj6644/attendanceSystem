@@ -7,10 +7,15 @@ import com.example.attendance.repo.UuidRepository;
 import com.example.attendance.entity.SiteUser;
 import com.example.attendance.user.UserRole;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -84,6 +89,14 @@ public class UserService {
     //-----------------------------유저 저장 ----------------------------------------//
     public void saveUser(SiteUser user){
         this.userRepo.save(user);
+    }
+
+
+    public Page<SiteUser> getList(int page){
+        List<Sort.Order> sorts=new ArrayList<>();
+        sorts.add(Sort.Order.desc("uuid"));
+        Pageable pageable = PageRequest.of(page,15,Sort.by(sorts));
+        return this.userRepo.findAll(pageable);
     }
 
 }

@@ -98,7 +98,7 @@ public class AttendanceService {
     public Page<Attendance> getSearchAttendance(LocalDate startDate, LocalDate endDate,SiteUser user,int page){
         List<Sort.Order> sorts=new ArrayList<>();
         sorts.add(Sort.Order.desc("startWorkTime"));
-        Pageable pageable = PageRequest.of(page,30,Sort.by(sorts));
+        Pageable pageable = PageRequest.of(page,93,Sort.by(sorts));
         return this.attenRepo.findByStartWorkTimeBetweenAndUser(startDate, endDate, user, pageable);
     }
 

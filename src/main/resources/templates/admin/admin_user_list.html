@@ -23,6 +23,34 @@
 <div th:include="layout/admin_nav_side :: containerFragment"></div>
 <div id="content-wrapper">
 <!--여기에 유저목록 페이징 -->
+
+  <table class="table table-bordered table-hover table-striped" style="background-color: #d9fbd9;">
+    <thead>
+    <tr>
+      <th>회원번호</th>
+      <th>회원 ID</th>
+      <th>회원 실명 </th>
+      <th>입사일</th>
+      <th>잔여 휴가</th>
+      <th>권한</th>
+      <th>권한 부여/회수</th>
+    </tr>
+    </thead>
+    <tbody id="attendanceBoard">
+    <!-- 수정된 부분: 데이터가 있을 때와 없을 때를 나누지 않고, 바로 리스트 출력 -->
+    <tr th:each="users, loop : ${userList}">
+      <td th:test="${users.uuid}"></td>
+      <td th:test="${users.username}"></td>
+      <td th:test="${users.realName}"></td>
+      <td th:test="${users.signupDate}"></td>
+      <td th:test="${users.AnnualCount + user.YearAnnalCount}"></td>
+      <td th:test="${users.role}"></td>
+      <td ><button th:if="${users.role.name() != 'USER'}">관리자 회수 </button><button th:if="${users.role.name() == 'USER'}">관리자 부여 </button></td>
+    </tr>
+    </tbody>
+  </table>
+
+
 </div>
 
 
