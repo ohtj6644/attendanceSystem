@@ -44,7 +44,7 @@ public class AdminView {
         Page<SiteUser> userList = this.userService.getList(page);
 
         model.addAttribute("user",user);
-        model.addAttribute("userList",userList);
+        model.addAttribute("paging",userList);
 
         return "/admin/admin_user_list";
 
