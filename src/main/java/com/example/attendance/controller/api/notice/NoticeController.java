@@ -29,10 +29,12 @@ public class NoticeController {
 
         if (user.getRole()!= UserRole.ADMIN){
             return ResponseEntity.badRequest().body("권한이 없습니다.");
-        }
-        this.noticeService.noticeCreate(formData,user);
+        }else{
+            this.noticeService.noticeCreate(formData,user);
 
-       return ResponseEntity.ok( "등록 완료 ");
+            return ResponseEntity.ok( "등록 완료 ");
+        }
+
     }
 
 
