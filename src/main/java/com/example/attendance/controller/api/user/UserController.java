@@ -67,6 +67,19 @@ public class UserController {
         return ResponseEntity.ok("로그아웃 되었습니다 ");
     }
 
+    //---------------------관리자권한 추가 --------------------//
+    @GetMapping("/admin/user/grantup/{id}")
+    public ResponseEntity<String> grantUp(@PathVariable("id")String id){
+
+        try{
+            this.userService.grantUp(id);
+            return ResponseEntity.ok(id+"번 유저에게 관리자 권한이 추가되었습니다.");
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("권한부여 실패 ");
+        }
+
+    }
+
 
 
 }

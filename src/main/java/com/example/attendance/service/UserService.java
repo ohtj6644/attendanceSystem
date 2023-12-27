@@ -99,4 +99,13 @@ public class UserService {
         return this.userRepo.findAll(pageable);
     }
 
+
+    //---------------------------관리자권한 부여 --------------------------------//
+    public void grantUp(String id){
+        Optional<SiteUser> siteUserOptional = this.userRepo.findById(id);
+        SiteUser siteUser = siteUserOptional.get();
+        siteUser.setRole(UserRole.ADMIN);
+        this.userRepo.save(siteUser);
+    }
+
 }
