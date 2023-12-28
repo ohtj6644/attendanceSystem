@@ -80,6 +80,19 @@ public class UserController {
 
     }
 
+    //---------------------관리자권한 회수 --------------------//
+    @GetMapping("/admin/user/grantdown/{id}")
+    public ResponseEntity<String> grantDown(@PathVariable("id")String id){
+
+        try{
+            this.userService.grantDown(id);
+            return ResponseEntity.ok(id+"번 유저에게 관리자 권한이 회수되었습니다.");
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("권한회수 실패 ");
+        }
+
+    }
+
 
 
 }

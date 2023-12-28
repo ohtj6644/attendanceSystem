@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>우리회사 근태관리 관리자화면 (구성원 목록)</title>
@@ -38,7 +38,7 @@
     </thead>
     <tbody id="attendanceBoard">
     <!-- 수정된 부분: 데이터가 있을 때와 없을 때를 나누지 않고, 바로 리스트 출력 -->
-    <tr id="uniqueUser" th:each="users, loop : ${paging}">
+    <tr class="uniqueUser" th:each="users, loop : ${paging}">
       <td th:text="${users.uuid}"></td>
       <td th:text="${users.username}"></td>
       <td th:text="${users.realName}"></td>
@@ -46,8 +46,8 @@
       <td th:text="${(users.AnnualCount ?: 0) + (users.YearAnnalCount ?: 0)}"></td>
       <td th:text="${users.role.name()}"></td>
       <td >
-        <button id="admin_minus_btn" class="btn btn-success" th:if="${users.role.name() != 'USER'}" th:value="${user.uuid}">관리자 회수 </button>
-        <button id="admin_plus_btn" class="btn btn-success" th:if="${users.role.name() == 'USER'}" th:value="${user.uuid}">관리자 부여 </button>
+        <button  type="button" class="admin_minus_btn btn btn-success" th:if="${users.role.name() != 'USER'}" th:value="${users.uuid}" >관리자 회수 </button>
+        <button type="button"  class="admin_plus_btn btn btn-success" th:if="${users.role.name() == 'USER'}" th:value="${users.uuid}" >관리자 부여 </button>
       </td>
     </tr>
     </tbody>

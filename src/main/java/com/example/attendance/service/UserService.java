@@ -108,4 +108,13 @@ public class UserService {
         this.userRepo.save(siteUser);
     }
 
+
+    //---------------------------관리자권한 회수 --------------------------------//
+    public void grantDown(String id){
+        Optional<SiteUser> siteUserOptional = this.userRepo.findById(id);
+        SiteUser siteUser = siteUserOptional.get();
+        siteUser.setRole(UserRole.USER);
+        this.userRepo.save(siteUser);
+    }
+
 }
