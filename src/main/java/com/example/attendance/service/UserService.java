@@ -95,7 +95,7 @@ public class UserService {
     public Page<SiteUser> getList(int page){
         List<Sort.Order> sorts=new ArrayList<>();
         sorts.add(Sort.Order.desc("uuid"));
-        Pageable pageable = PageRequest.of(page,15,Sort.by(sorts));
+        Pageable pageable = PageRequest.of(page,10,Sort.by(sorts));
         return this.userRepo.findAll(pageable);
     }
 

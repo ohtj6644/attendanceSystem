@@ -120,4 +120,30 @@ public class viewController {
 
 
 
+    //---------------------- 휴가신청 --------------------------//
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/user/annual")
+    public String annualRequest(Model model, Principal principal){
+        SiteUser user= this.userService.findUser(principal.getName());
+
+        boolean todayState ;
+        if(attendanceService.getNowAttendance(user)==null){
+            todayState = false;
+        }else if ((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()== null) ) {
+            todayState = true;
+            model.addAttribute("startWorkTime",attendanceService.getNowAttendance(user).getStartWorkTime());
+
+        }else if((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()!= null)){
+            todayState = false;
+        }else {
+            todayState = false;
+        }
+
+        model.addAttribute("todayState",todayState);
+        model.addAttribute("user",user);
+        return "Annual_Create";
+    }
+
+
+
 }

@@ -95,4 +95,16 @@ public class UserController {
 
 
 
+    //--------------------유저 테스트데이터 생성---------------------//
+    @GetMapping("admin/test/userPlus")
+    public String userPlus(){
+
+        for(int i=0; i<90; i++){
+            this.userService.newUser("userTest"+i,"1234","테스트유저"+i, LocalDateTime.now());
+        }
+        return "테스트유저 생성완료";
+    }
+
+
+
 }

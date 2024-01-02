@@ -1,0 +1,25 @@
+
+.container{
+    text-align: center;
+}
+.annual_content{
+    text-align:left;
+    display:inline-block;
+    width:50%;
+    margin-top: 50px;
+
+}
+
+.form-group>input{
+
+}
+
+.annual_title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.annual_title>p{
+    font-size: 24px;
+    font-weight: bold;
+    }

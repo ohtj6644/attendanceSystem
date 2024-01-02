@@ -54,6 +54,8 @@ public class SiteUser {
     private List<Attendance> attendances;
     //근태
 
+
+
     @DBRef
     @JsonIgnore
     private List<Notice> notices;

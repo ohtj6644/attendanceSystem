@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>우리회사 근태관리 [휴가신청]</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/nav_side.css"/>
+    <link rel="stylesheet" href="/css/annual_create.css"/>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap 3 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <!-- 기존 스크립트 파일들 -->
+    <script src="Scripts/jquery-1.11.0.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+<div th:include="layout/nav_side :: containerFragment"></div>
+<script src="/js/nav_side.js"></script>
+
+
+<div class="container">
+    <div class="annual_content">
+    <div class="annual_title" >
+        <p>연차 신청 계획</p>
+    </div>
+    <form id="annualForm">
+        <div class="form-group">
+            <label for="annualDate">휴가 희망일:</label>
+            <input type="datetime-local" class="form-control" id="annualDate" style="width:200px; display:inline-block;" >
+        </div>
+        <div class="form-group">
+            <label for="reason">휴가 신청사유:</label>
+            <input type="text" class="form-control" id="reason" style="width:400px; display:inline-block;">
+        </div>
+        <button type="button" class="btn btn-success" id="annualBtn">연차 신청하기</button>
+    </form>
+    </div>
+</div>
+
+
+</body>
+</html>
