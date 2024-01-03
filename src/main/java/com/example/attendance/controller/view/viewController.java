@@ -114,7 +114,7 @@ public class viewController {
         model.addAttribute("user",user);
 
 
-        return "My_Attendance";
+        return "user_attendance";
     }
 
 
@@ -141,7 +141,7 @@ public class viewController {
 
         model.addAttribute("todayState",todayState);
         model.addAttribute("user",user);
-        return "Annual_Create";
+        return "user_annual_create";
     }
 
 
