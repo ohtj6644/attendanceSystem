@@ -61,16 +61,16 @@ public class SiteUser {
     private List<Notice> notices;
 
 
-    private Integer AnnualCount;
+    private int AnnualCount;
     //잔여 휴가 개수
 
-    private Integer useAnnal;
+    private int useAnnal;
     //사용한 휴가 개수
 
-    private Integer YearAnnalCount;
+    private int YearAnnalCount;
     //잔여 연차 개수
 
-    private Integer useYearAnnal;
+    private int useYearAnnal;
     //사용한 연차 개수
 
 

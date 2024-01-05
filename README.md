@@ -326,3 +326,10 @@
  
 ### 2024-01-04
 - [휴가신청 테스트 ]_otj
+
+
+### 2024-01-05
+- [휴가신청 로직 수정]_otj
+  1. html 스크립트 중복제거 
+  2. user 엔티티 휴가값 타입 Integer > int 변경 
+  3. LocalDate > LocalDateTime 으로 데이터 받은 후 다시 LocalDate 로 변환 하도록 수정 
