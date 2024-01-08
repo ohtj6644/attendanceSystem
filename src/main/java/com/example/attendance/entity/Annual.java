@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Document("annual")
 @Data
@@ -27,7 +28,10 @@ public class Annual {
     //휴가 신청인
 
     private LocalDate annualDate;
-    //휴가 신청일
+    //휴가 희망일
+
+    private LocalDateTime createDate;
+    //신청일
 
     private boolean approval;
     // 승인여부

@@ -1,9 +1,11 @@
 package com.example.attendance.controller.view;
 
 
+import com.example.attendance.entity.Annual;
 import com.example.attendance.entity.Attendance;
 import com.example.attendance.entity.Notice;
 import com.example.attendance.entity.SiteUser;
+import com.example.attendance.service.AnnualService;
 import com.example.attendance.service.AttendanceService;
 import com.example.attendance.service.NoticeService;
 import com.example.attendance.service.UserService;
@@ -32,6 +34,7 @@ public class viewController {
     private final UserService userService;
     private final AttendanceService attendanceService;
     private final NoticeService noticeService;
+    private final AnnualService annualService;
 
 
     //-----------------유저 로그인 화면 반환---------------------//
@@ -145,5 +148,29 @@ public class viewController {
     }
 
 
+    //---------------------- 휴가신청내역 --------------------------//
+    @GetMapping("/user/annual/enroll")
+    public String enrollRequest(Model model , Principal principal,@RequestParam(value = "page",defaultValue = "0")int page){
+        SiteUser user= this.userService.findUser(principal.getName());
+        Page<Annual> annualList=this.annualService.getUserList(user,page);
+
+        boolean todayState ;
+        if(attendanceService.getNowAttendance(user)==null){
+            todayState = false;
+        }else if ((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()== null) ) {
+            todayState = true;
+            model.addAttribute("startWorkTime",attendanceService.getNowAttendance(user).getStartWorkTime());
+
+        }else if((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()!= null)){
+            todayState = false;
+        }else {
+            todayState = false;
+        }
+
+        model.addAttribute("todayState",todayState);
+        model.addAttribute("user",user);
+        model.addAttribute("annualList",annualList);
+        return "user_annual_enroll_list";
+    }
 
 }
