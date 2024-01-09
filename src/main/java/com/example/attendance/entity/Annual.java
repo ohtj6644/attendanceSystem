@@ -33,8 +33,8 @@ public class Annual {
     private LocalDateTime createDate;
     //신청일
 
-    private boolean approval;
-    // 승인여부
+    private String approval;
+    // 승인상태 : 승인대기/승인/반려/취소
 
     private SiteUser approvalUser;
     // 휴가 승인인원

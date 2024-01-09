@@ -169,7 +169,7 @@ public class viewController {
 
         model.addAttribute("todayState",todayState);
         model.addAttribute("user",user);
-        model.addAttribute("annualList",annualList);
+        model.addAttribute("paging",annualList);
         return "user_annual_enroll_list";
     }
 
