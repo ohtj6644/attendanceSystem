@@ -52,4 +52,13 @@ public class AnnualService {
         annual.setApproval("취소");
         this.AnnualRepo.save(annual);
     }
+
+
+    public Page<Annual> getannualEnrollList(int page){
+        List<Sort.Order> sorts=new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page,10,Sort.by(sorts));
+        return this.AnnualRepo.findAll(pageable);
+
+    }
 }

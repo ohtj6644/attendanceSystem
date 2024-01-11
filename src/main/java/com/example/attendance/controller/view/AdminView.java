@@ -1,6 +1,8 @@
 package com.example.attendance.controller.view;
 
+import com.example.attendance.entity.Annual;
 import com.example.attendance.entity.SiteUser;
+import com.example.attendance.service.AnnualService;
 import com.example.attendance.service.UserService;
 import com.example.attendance.user.UserCreateForm;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,9 @@ public class AdminView {
 
 
     private final UserService userService;
+    private final AnnualService annualService;
+
+
     //----------------유저 회원가입 화면 반환 ------------------//
     @GetMapping("/admin/signup")
     @PreAuthorize("isAuthenticated()")
@@ -45,6 +50,22 @@ public class AdminView {
 
         model.addAttribute("user",user);
         model.addAttribute("paging",userList);
+
+        return "/admin/admin_user_list";
+
+    }
+
+
+    //----------------연차신청 현황 목록 화면 반환 ------------------//
+    @GetMapping("/admin/annual/enroll/list")
+    @PreAuthorize("isAuthenticated()")
+    public String getannualEnrollList(Model model, Principal principal, @RequestParam(value = "page",defaultValue = "0")int page){
+
+        SiteUser user = userService.findUser(principal.getName());
+        Page<Annual> enrollList = this.annualService.getannualEnrollList(page);
+
+        model.addAttribute("user",user);
+        model.addAttribute("paging",enrollList);
 
         return "/admin/admin_user_list";
 

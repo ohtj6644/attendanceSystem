@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>우리회사 근태관리 관리자화면 (연차신청 현황)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--    <link rel="stylesheet" href="/css/nav_side.css"/>-->
+    <link rel="stylesheet" href="/css/layout/admin_nav_side.css"/>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap 3 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <!-- 기존 스크립트 파일들 -->
+    <script src="Scripts/jquery-1.11.0.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:include="layout/admin_nav_side :: containerFragment"></div>
+<div id="content-wrapper">
+    <!--여기에 유저목록 페이징 -->
+
+    <table class="table table-bordered table-hover table-striped" style="background-color: #d9fbd9;">
+        <thead>
+        <tr>
+            <th>연차신청 id</th>
+            <th>연차 신청인</th>
+            <th>연차 희망일 </th>
+            <th>연차 신청일</th>
+            <th>신청사유</th>
+            <th>승인상태</th>
+            <th>승인/반려</th>
+        </tr>
+        </thead>
+        <tbody id="attendanceBoard">
+        <!-- 수정된 부분: 데이터가 있을 때와 없을 때를 나누지 않고, 바로 리스트 출력 -->
+        <tr class="uniqueEnroll" th:each="enroll, loop : ${paging}">
+            <td th:text="${enroll.id}"></td>
+            <td th:text="${enroll.user.username}"></td>
+            <td th:text="${enroll.annualDate}"></td>
+            <td th:text="${enroll.createDate}"></td>
+            <td th:text="${enroll.reason}"></td>
+            <td th:text="${enroll.approval}"></td>
+            <td >
+                <button  type="button" class="enroll_ok_btn btn btn-success" th:if="${enroll.approval!= '신청'}" th:value="${enroll.id}" >관리자 회수 </button>
+                <button type="button"  class="enroll_no_btn btn btn-success" th:if="${enroll.approval == '신청'}" th:value="${enroll.id}" >관리자 부여 </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <!-- 페이징처리 시작 -->
+    <div th:if="${!paging.isEmpty()}" style="text-align: center;">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                <a class="page-link" th:href="${paging.hasPrevious} ? @{|?page=${paging.number-1}|} : @{|?page=0|}">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                th:classappend="${page == paging.number} ? 'active'"
+                class="page-item">
+                <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page}|}" style="background-color: #5cb85c;"></a>
+            </li>
+            <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- 페이징처리 끝 -->
+
+
+</div>
+
+
+
+<script src="/js/layout/admin_nav.js"></script>
+</body>
+</html>

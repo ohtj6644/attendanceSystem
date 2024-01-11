@@ -48,8 +48,8 @@ public class AnnualCountScheduler {
                 //가입일로부터 년수 체크
 
                 int useYearAnnualCount = user.getUseYearAnnal();
-                user.setYearAnnalCount((yearCount*12)-useYearAnnualCount);
-                //1년마다 12개의 연차를 지급하고 / 해당 연차총 개수 에서 사용한 연차를 뺀 나머지 연차를 저장.
+                user.setYearAnnalCount((yearCount*15)-useYearAnnualCount);
+                //1년마다 15개의 연차를 지급하고 / 해당 연차총 개수 에서 사용한 연차를 뺀 나머지 연차를 저장.
 
             }
         }
