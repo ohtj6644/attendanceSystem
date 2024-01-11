@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +29,7 @@ public class AnnualService {
         annual.setAnnualDate(annualDate.toLocalDate());
         annual.setReason(reason);
         annual.setCreateDate(LocalDateTime.now());
+        annual.setApproval("신청");
         this.AnnualRepo.save(annual);
 
     }
@@ -37,5 +39,17 @@ public class AnnualService {
         sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page,15,Sort.by(sorts));
         return this.AnnualRepo.findAllAndUser(pageable, user);
+    }
+
+
+    public Annual getAnnualOne(String id ){
+        Optional<Annual> temp=this.AnnualRepo.findById(id);
+        Annual annual= temp.get();
+        return annual;
+    }
+
+    public void  annualCancel(Annual annual){
+        annual.setApproval("취소");
+        this.AnnualRepo.save(annual);
     }
 }
