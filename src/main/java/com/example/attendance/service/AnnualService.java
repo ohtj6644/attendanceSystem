@@ -38,7 +38,7 @@ public class AnnualService {
         List<Sort.Order> sorts=new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page,15,Sort.by(sorts));
-        return this.AnnualRepo.findAllAndUser(pageable, user);
+        return this.AnnualRepo.findByUser(pageable, user);
     }
 
 
@@ -54,7 +54,7 @@ public class AnnualService {
     }
 
 
-    public Page<Annual> getannualEnrollList(int page){
+    public Page<Annual> getAnnualEnrollList(int page){
         List<Sort.Order> sorts=new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page,10,Sort.by(sorts));

@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties("site_User")
+@JsonIgnoreProperties("site_user")
 public class Annual {
     //연차신청
 

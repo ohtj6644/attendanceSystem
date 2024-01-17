@@ -11,5 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AnnualRepository extends MongoRepository<Annual,String> {
 
-    Page<Annual> findAllAndUser(Pageable pageable, SiteUser user);
+    Page<Annual> findByUser(Pageable pageable, SiteUser user);
+
+    Page<Annual> findAll(Pageable pageable);
 }

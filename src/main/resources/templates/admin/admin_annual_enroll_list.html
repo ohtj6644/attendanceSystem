@@ -46,8 +46,8 @@
             <td th:text="${enroll.reason}"></td>
             <td th:text="${enroll.approval}"></td>
             <td >
-                <button  type="button" class="enroll_ok_btn btn btn-success" th:if="${enroll.approval!= '신청'}" th:value="${enroll.id}" >관리자 회수 </button>
-                <button type="button"  class="enroll_no_btn btn btn-success" th:if="${enroll.approval == '신청'}" th:value="${enroll.id}" >관리자 부여 </button>
+                <button  type="button" class="enroll_ok_btn btn btn-success" th:if="${enroll.approval== '신청'}" th:value="${enroll.id}" > 승인 </button>
+                <button type="button"  class="enroll_no_btn btn btn-success" th:if="${enroll.approval == '신청'}" th:value="${enroll.id}" > 반려 </button>
             </td>
         </tr>
         </tbody>

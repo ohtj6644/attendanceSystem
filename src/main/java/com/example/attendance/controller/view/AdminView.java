@@ -62,12 +62,12 @@ public class AdminView {
     public String getannualEnrollList(Model model, Principal principal, @RequestParam(value = "page",defaultValue = "0")int page){
 
         SiteUser user = userService.findUser(principal.getName());
-        Page<Annual> enrollList = this.annualService.getannualEnrollList(page);
+        Page<Annual> enrollList = this.annualService.getAnnualEnrollList(page);
 
         model.addAttribute("user",user);
         model.addAttribute("paging",enrollList);
 
-        return "/admin/admin_user_list";
+        return "/admin/admin_annual_enroll_list";
 
     }
 

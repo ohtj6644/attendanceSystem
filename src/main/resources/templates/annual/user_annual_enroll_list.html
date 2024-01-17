@@ -16,9 +16,9 @@
 <body>
 <div th:include="layout/nav_side :: containerFragment"></div>
 
-<div class="container">
+<div class="container" style="text-align: center;">
     <!--  리스트 시작   -->
-    <table class="table table-bordered table-hover table-striped" style="background-color: #d9fbd9;">
+    <table class="table table-bordered table-hover table-striped" style="background-color: #d9fbd9; width:70%; display: inline-block" >
         <thead>
         <tr>
             <th>연차 신청일</th>
@@ -35,7 +35,10 @@
             <td th:text="${annual.createDate}"></td>
             <td th:text="${annual.annualDate}"></td>
             <td th:text="${annual.approval}"></td>
-            <td th:text="${annual.approvalUser.username}"></td>
+            <td>
+                <p th:if="${annual.approvalUser}" th:text="${annual.approvalUser.username}"></p>
+                <p th:unless="${annual.approvalUser}">결제 전</p>
+            </td>
             <td th:text="${annual.reason}"></td>
             <td>
                 <button  type="button" class="annual_cancel_btn btn btn-success"  th:value="${annual.id}" >신청취소</button>

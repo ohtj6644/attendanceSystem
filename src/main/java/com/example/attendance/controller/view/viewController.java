@@ -144,7 +144,7 @@ public class viewController {
 
         model.addAttribute("todayState",todayState);
         model.addAttribute("user",user);
-        return "/annual/user_annual_create";
+        return "annual/user_annual_create";
     }
 
 
@@ -170,7 +170,7 @@ public class viewController {
         model.addAttribute("todayState",todayState);
         model.addAttribute("user",user);
         model.addAttribute("paging",annualList);
-        return "/annual/user_annual_enroll_list";
+        return "annual/user_annual_enroll_list";
     }
 
 }
