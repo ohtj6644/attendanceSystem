@@ -4,6 +4,7 @@ package com.example.attendance.controller.api.annual;
 import com.example.attendance.entity.Annual;
 import com.example.attendance.entity.SiteUser;
 import com.example.attendance.service.AnnualService;
+import com.example.attendance.service.AttendanceService;
 import com.example.attendance.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,8 @@ public class AnnualController {
     private final UserService userService;
 
     private final AnnualService annualService;
+
+    private final AttendanceService attendanceService;
 
 
     //---------------------------연차신청-----------------------------------//
@@ -61,23 +64,58 @@ public class AnnualController {
 
     //---------------------------연차신청 취소-----------------------------------//
     @GetMapping("/annual/cancel/{id}")
-    public ResponseEntity<String> annualCancel(Principal principal, @PathVariable("id")String id){
+    public ResponseEntity<String> annualCancel(Principal principal, @PathVariable("id")String id) {
         SiteUser user = userService.findUser(principal.getName());
         //접속자정보로 유저정보 검색
         Annual annual = this.annualService.getAnnualOne(id);
         //연차신청 id 정보로 연차신청내역 검색
         try {
-            if(user.getUsername().equals(annual.getUser().getUsername())){
+            if (user.getUsername().equals(annual.getUser().getUsername())) {
                 this.annualService.annualCancel(annual);
                 return ResponseEntity.ok("연차신청 취소가 완료 되었습니다.");
-            }else {
+            } else {
                 return ResponseEntity.ok("해당 연차의 신청자가 아닙니다.");
             }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("오류가 발생했습니다. 오류::" + e);
+        }
+    }
+
+
+        //---------------------------연차승인 -----------------------------------//
+        @GetMapping("/admin/annual/enroll/ok/{id}")
+        public ResponseEntity<String> annualEnrollOk(Principal principal, @PathVariable("id")String id){
+            SiteUser user = userService.findUser(principal.getName());
+            //접속자정보로 유저정보 검색
+            Annual annual = this.annualService.getAnnualOne(id);
+            //연차신청 id 정보로 연차신청내역 검색
+            try {
+                    this.annualService.annualEnrollOk(annual,user);
+                    this.attendanceService.annualEnrollOk(annual);
+                    this.userService.usedAnnual(annual);
+                    return ResponseEntity.ok("연차가 승인 되었습니다.");
+
+            }catch (Exception e){
+                return ResponseEntity.badRequest().body("오류가 발생했습니다. 오류::"+e);
+            }
+
+        }
+
+    //---------------------------연차반려 -----------------------------------//
+
+    @GetMapping("/admin/annual/enroll/no/{id}")
+    public ResponseEntity<String> annualEnrollNo(Principal principal, @PathVariable("id")String id){
+        SiteUser user = userService.findUser(principal.getName());
+        //접속자정보로 유저정보 검색
+        Annual annual = this.annualService.getAnnualOne(id);
+        //연차신청 id 정보로 연차신청내역 검색
+        try {
+            this.annualService.annualEnrollNo(annual,user);
+            return ResponseEntity.ok("연차가 반려 되었습니다.");
+
         }catch (Exception e){
             return ResponseEntity.badRequest().body("오류가 발생했습니다. 오류::"+e);
         }
-
-
 
     }
 }

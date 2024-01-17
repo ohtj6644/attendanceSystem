@@ -38,8 +38,8 @@ public class Attendance {
     private int workTime;
     //근무 시간 (단위 : 분)
 
-    private int Annual=0;
-    //휴가여부
+    private String Annual="정상근무";
+    //휴가여부  정상근무 , 휴가사용
 
 
 }

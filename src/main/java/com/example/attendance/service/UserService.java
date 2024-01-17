@@ -1,6 +1,7 @@
 package com.example.attendance.service;
 
 
+import com.example.attendance.entity.Annual;
 import com.example.attendance.entity.Uuid;
 import com.example.attendance.repo.UserRepository;
 import com.example.attendance.repo.UuidRepository;
@@ -114,6 +115,18 @@ public class UserService {
         Optional<SiteUser> siteUserOptional = this.userRepo.findById(id);
         SiteUser siteUser = siteUserOptional.get();
         siteUser.setRole(UserRole.USER);
+        this.userRepo.save(siteUser);
+    }
+
+
+    //--------------------------연차사용 횟수차감-----------------------------------//
+    public void usedAnnual(Annual annual){
+        SiteUser siteUser= annual.getUser();
+        if(siteUser.getAnnualCount()!=0){
+            siteUser.setAnnualCount(siteUser.getAnnualCount()-1);
+        }else {
+            siteUser.setYearAnnalCount(siteUser.getYearAnnalCount()-1);
+        }
         this.userRepo.save(siteUser);
     }
 

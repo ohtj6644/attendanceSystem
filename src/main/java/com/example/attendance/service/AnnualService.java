@@ -61,4 +61,18 @@ public class AnnualService {
         return this.AnnualRepo.findAll(pageable);
 
     }
+
+    //-------------------연차승인------------------//
+    public void annualEnrollOk(Annual annual,SiteUser user){
+        annual.setApproval("승인");
+        annual.setApprovalUser(user);
+        this.AnnualRepo.save(annual);
+
+    }
+    //-------------------연차반려------------------//
+    public void annualEnrollNo(Annual annual,SiteUser siteUser){
+        annual.setApproval("반려");
+        annual.setApprovalUser(siteUser);
+        this.AnnualRepo.save(annual);
+    }
 }

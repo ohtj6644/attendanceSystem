@@ -10,7 +10,7 @@ $(document).ready(function () {
         // 서버에 AJAX 요청 보내기
         $.ajax({
             type: "GET",
-            url: "/annual/cancel/"+userId,
+            url: "/annual/cancel/"+annualId,
             success: function (data) {
                 // 성공 시 팝업 창에 결과 표시
                 alert(data);

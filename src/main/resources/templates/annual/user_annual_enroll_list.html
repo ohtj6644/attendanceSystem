@@ -41,7 +41,7 @@
             </td>
             <td th:text="${annual.reason}"></td>
             <td>
-                <button  type="button" class="annual_cancel_btn btn btn-success"  th:value="${annual.id}" >신청취소</button>
+                <button  type="button" class="annual_cancel_btn btn btn-success"  th:if="${annual.approval== '신청'}" th:value="${annual.id}" >신청취소</button>
             </td>
         </tr>
         </tbody>
@@ -73,5 +73,6 @@
 </div>
 
 <script src="/js/layout/nav_side.js"></script>
+<script src="/js/annual/user_annual_enroll_list.js"></script>
 </body>
 </html>

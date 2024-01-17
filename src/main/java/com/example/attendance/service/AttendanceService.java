@@ -1,6 +1,7 @@
 package com.example.attendance.service;
 
 
+import com.example.attendance.entity.Annual;
 import com.example.attendance.entity.Attendance;
 import com.example.attendance.entity.SiteUser;
 import com.example.attendance.repo.AttendanceRepository;
@@ -34,7 +35,7 @@ public class AttendanceService {
         attendance.setId(LocalDate.now().toString()+user.getUsername());
         attendance.setUser(user);
         attendance.setStartWorkTime(LocalDateTime.now());
-        this.attenRepo.insert(attendance);
+        this.attenRepo.save(attendance);
 
         return attendance.getId();
 
@@ -100,6 +101,17 @@ public class AttendanceService {
         sorts.add(Sort.Order.desc("startWorkTime"));
         Pageable pageable = PageRequest.of(page,93,Sort.by(sorts));
         return this.attenRepo.findByStartWorkTimeBetweenAndUser(startDate, endDate, user, pageable);
+    }
+
+    //-------------------연차사용 근태 생성 --------------------------//
+    public void  annualEnrollOk(Annual annual){
+        Attendance attendance = new Attendance();
+        attendance.setId(LocalDate.now().toString()+annual.getUser().getUsername());
+        attendance.setUser(annual.getUser());
+        attendance.setStartWorkTime(annual.getAnnualDate().atTime( 9,00));
+        attendance.setEndWorkTime(annual.getAnnualDate().atTime(18,00));
+        attendance.setAnnual("사용");
+        this.attenRepo.save(attendance);
     }
 
 
