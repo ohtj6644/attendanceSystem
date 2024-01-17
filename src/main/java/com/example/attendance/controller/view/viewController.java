@@ -117,7 +117,7 @@ public class viewController {
         model.addAttribute("user",user);
 
 
-        return "user_attendance";
+        return "attendance/user_attendance";
     }
 
 
