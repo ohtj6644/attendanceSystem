@@ -123,9 +123,9 @@ public class UserService {
     public void usedAnnual(Annual annual){
         SiteUser siteUser= annual.getUser();
         if(siteUser.getAnnualCount()!=0){
-            siteUser.setAnnualCount(siteUser.getAnnualCount()-1);
+            siteUser.setUseAnnal(siteUser.getUseAnnal()+1);
         }else {
-            siteUser.setYearAnnalCount(siteUser.getYearAnnalCount()-1);
+            siteUser.setUseYearAnnal(siteUser.getUseYearAnnal()+1);
         }
         this.userRepo.save(siteUser);
     }
