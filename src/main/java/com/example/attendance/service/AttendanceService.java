@@ -110,7 +110,7 @@ public class AttendanceService {
         attendance.setUser(annual.getUser());
         attendance.setStartWorkTime(annual.getAnnualDate().atTime( 9,00));
         attendance.setEndWorkTime(annual.getAnnualDate().atTime(18,00));
-        attendance.setAnnual("사용");
+        attendance.setAttendanceType("연차");
         this.attenRepo.save(attendance);
     }
 
