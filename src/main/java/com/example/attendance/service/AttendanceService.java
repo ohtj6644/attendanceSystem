@@ -111,6 +111,14 @@ public class AttendanceService {
         attendance.setStartWorkTime(annual.getAnnualDate().atTime( 9,00));
         attendance.setEndWorkTime(annual.getAnnualDate().atTime(18,00));
         attendance.setAttendanceType("연차");
+
+        Duration duration=Duration.between(attendance.getStartWorkTime(),attendance.getEndWorkTime());
+
+        int hours= duration.toHoursPart()*60;
+        int minutes = duration.toMinutesPart();
+
+        //구한 시간차를 근무시간에 저장.
+        attendance.setWorkTime(hours+minutes);
         this.attenRepo.save(attendance);
     }
 
