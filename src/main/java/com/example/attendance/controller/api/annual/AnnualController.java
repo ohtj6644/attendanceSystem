@@ -43,7 +43,7 @@ public class AnnualController {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
             LocalDateTime annualDate = LocalDateTime.parse(annualDateTemp, formatter);
             //fomatter 를 이용하여 받은 String 값 LocalDate 로 변환.
-            if (user.getAnnualCount() > 0 || user.getYearAnnalCount() > 0) {
+            if (user.getAnnualCount()-user.getYearAnnalCount() > 0 || user.getYearAnnalCount()-user.getUseYearAnnal() > 0) {
                 try {
                     this.annualService.annualEnroll(user, annualDate, reason);
                     return ResponseEntity.ok(annualDate + "일자 연차 신청이 완료 되었습니다.");

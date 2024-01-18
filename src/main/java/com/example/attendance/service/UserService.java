@@ -122,7 +122,7 @@ public class UserService {
     //--------------------------연차사용 횟수차감-----------------------------------//
     public void usedAnnual(Annual annual){
         SiteUser siteUser= annual.getUser();
-        if(siteUser.getAnnualCount()!=0){
+        if(siteUser.getAnnualCount()-siteUser.getUseAnnal()!=0){
             siteUser.setUseAnnal(siteUser.getUseAnnal()+1);
         }else {
             siteUser.setUseYearAnnal(siteUser.getUseYearAnnal()+1);
