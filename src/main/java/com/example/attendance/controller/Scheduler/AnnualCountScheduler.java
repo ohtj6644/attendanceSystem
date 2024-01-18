@@ -38,23 +38,23 @@ public class AnnualCountScheduler {
                 int days = (int) Duration.between(signupDate, now).toDays()/30;
                 //30일당 한개씩 휴가 생성.
 
-                int useAnnualCount = user.getUseAnnal();
-                user.setAnnualCount(days-useAnnualCount );
-                //생성한 총휴가수에 사용한 휴가 개수를 뺀 값을 저장.
+                user.setAnnualCount(days);
 
-                siteUserService.saveUser(user);
             }else {
                 int yearCount=(int) Duration.between(signupDate, now).toDays()/365;
                 //가입일로부터 년수 체크
 
-                int useYearAnnualCount = user.getUseYearAnnal();
-                user.setYearAnnalCount((yearCount*15)-useYearAnnualCount);
-                //1년마다 15개의 연차를 지급하고 / 해당 연차총 개수 에서 사용한 연차를 뺀 나머지 연차를 저장.
+
+                user.setYearAnnalCount(yearCount*15);
+                //1년마다 15개의 연차를 지급하고
 
             }
+            siteUserService.saveUser(user);
         }
     }
 
 
 
 }
+
+//연차 부여로직은 가입일 기준으로 수정예정
