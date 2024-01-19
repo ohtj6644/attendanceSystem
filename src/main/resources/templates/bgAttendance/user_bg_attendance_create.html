@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>우리회사 근태관리 [휴가신청]</title>
+    <title>우리회사 근태관리 [외근신청]</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/layout/nav_side.css"/>
-    <link rel="stylesheet" href="/css/annual/user_annual_create.css"/>
+    <link rel="stylesheet" href="/css/bgAttendance/user_bg_attendance_create.css"/>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap 3 JS -->
@@ -17,25 +17,25 @@
 <div th:include="layout/nav_side :: containerFragment"></div>
 
 <div class="container" style="text-align: center">
-    <div class="annual_content" style="text-align: center">
-        <div class="annual_title" >
-            <p>연차 신청 계획</p>
+    <div class="bg_content" style="text-align: center">
+        <div class="bg_title" >
+            <p>외근 신청 계획</p>
         </div>
-        <form id="annualForm">
+        <form id="bgForm">
             <div class="form-group">
-                <label for="annualDate">휴가 희망일:</label>
-                <input type="date" class="form-control" id="annualDate" style="width:200px; display:inline-block;" >
+                <label for="bgDate">외근 예정일:</label>
+                <input type="date" class="form-control" id="bgDate" style="width:200px; display:inline-block;" >
             </div>
             <div class="form-group">
-                <label for="reason">휴가 신청사유:</label>
-                <input type="text" class="form-control" id="reason" style="width:400px;">
+                <label for="area">외근 지역 및 사유:</label>
+                <input type="text" class="form-control" id="area" style="width:400px;">
             </div>
-            <button type="button" class="btn btn-success" id="annualBtn">연차 신청하기</button>
+            <button type="button" class="btn btn-success" id="bgBtn">외근 신청하기</button>
         </form>
     </div>
 </div>
 
 <script src="/js/layout/nav_side.js"></script>
-<script src="/js/annual/user_annual_create.js"></script>
+<script src="/js/bgAttendance/user_bg_attendance_create.js"></script>
 </body>
 </html>
