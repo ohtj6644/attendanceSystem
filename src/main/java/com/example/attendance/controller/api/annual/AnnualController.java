@@ -40,8 +40,8 @@ public class AnnualController {
             //접속자정보로 유저정보 검색
 
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-            LocalDateTime annualDate = LocalDateTime.parse(annualDateTemp, formatter);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate annualDate = LocalDate.parse(annualDateTemp, formatter);
             //fomatter 를 이용하여 받은 String 값 LocalDate 로 변환.
             if (user.getAnnualCount()-user.getYearAnnalCount() > 0 || user.getYearAnnalCount()-user.getUseYearAnnal() > 0) {
                 try {

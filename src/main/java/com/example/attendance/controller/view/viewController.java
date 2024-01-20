@@ -149,7 +149,7 @@ public class viewController {
 
 
     //---------------------- 휴가신청내역 --------------------------//
-    @GetMapping("/user/annual/enroll")
+    @GetMapping("/user/annual/enroll/list")
     public String enrollRequest(Model model , Principal principal,@RequestParam(value = "page",defaultValue = "0")int page){
         SiteUser user= this.userService.findUser(principal.getName());
         Page<Annual> annualList=this.annualService.getUserList(user,page);

@@ -10,7 +10,7 @@
             url: "/bgAttendance/enroll",
             data: JSON.stringify({
                 bgDate: bgDate,
-                area :area
+                area: area
             }),
             contentType: "application/json; charset=utf-8",
         })

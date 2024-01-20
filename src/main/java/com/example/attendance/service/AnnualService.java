@@ -23,10 +23,10 @@ public class AnnualService {
 
     private final AnnualRepository AnnualRepo;
 
-    public void annualEnroll(SiteUser user, LocalDateTime annualDate, String reason){
+    public void annualEnroll(SiteUser user, LocalDate annualDate, String reason){
         Annual annual = new Annual();
         annual.setUser(user);
-        annual.setAnnualDate(annualDate.toLocalDate());
+        annual.setAnnualDate(annualDate);
         annual.setReason(reason);
         annual.setCreateDate(LocalDateTime.now());
         annual.setApproval("신청");
