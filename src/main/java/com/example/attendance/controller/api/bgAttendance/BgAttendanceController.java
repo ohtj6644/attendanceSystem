@@ -1,14 +1,14 @@
 package com.example.attendance.controller.api.bgAttendance;
 
 
+import com.example.attendance.entity.Annual;
+import com.example.attendance.entity.BgAttendance;
 import com.example.attendance.entity.SiteUser;
 import com.example.attendance.service.BgAttendanceService;
 import com.example.attendance.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.time.LocalDate;
@@ -24,7 +24,7 @@ public class BgAttendanceController {
 
     private final UserService userService;
 
-    //---------------------------연차신청-----------------------------------//
+    //---------------------------외근신청-----------------------------------//
     @PostMapping("/bgAttendance/enroll")
     public ResponseEntity<String> annualEnroll(@RequestBody Map<String, Object> requestBody, Principal principal) {
 
@@ -59,5 +59,25 @@ public class BgAttendanceController {
             return ResponseEntity.badRequest().body(e+"처리중 에러가 발생했습니다.");
         }
 
+    }
+
+    ///user/bg/cancel/
+    //---------------------------외근신청취소-----------------------------------//
+    @GetMapping("/user/bg/cancel/{id}")
+    public ResponseEntity<String> bgCancel(Principal principal, @PathVariable("id")String id) {
+        SiteUser user = userService.findUser(principal.getName());
+        //접속자정보로 유저정보 검색
+        BgAttendance bg = this.bgService.getBgOne(id);
+        //연차신청 id 정보로 연차신청내역 검색
+        try {
+            if (user.getUsername().equals(bg.getUser().getUsername())) {
+                this.bgService.bgCancel(bg);
+                return ResponseEntity.ok("연차신청 취소가 완료 되었습니다.");
+            } else {
+                return ResponseEntity.ok("해당 연차의 신청자가 아닙니다.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("오류가 발생했습니다. 오류::" + e);
+        }
     }
 }

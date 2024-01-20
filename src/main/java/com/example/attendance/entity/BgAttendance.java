@@ -24,7 +24,7 @@ public class BgAttendance {
     private  SiteUser user;
     //외근 신청인
 
-    private LocalDate BgDate;
+    private LocalDate bgDate;
     //외근 희망일
 
     private LocalDateTime createDate;

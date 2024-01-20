@@ -1,14 +1,8 @@
 package com.example.attendance.controller.view;
 
 
-import com.example.attendance.entity.Annual;
-import com.example.attendance.entity.Attendance;
-import com.example.attendance.entity.Notice;
-import com.example.attendance.entity.SiteUser;
-import com.example.attendance.service.AnnualService;
-import com.example.attendance.service.AttendanceService;
-import com.example.attendance.service.NoticeService;
-import com.example.attendance.service.UserService;
+import com.example.attendance.entity.*;
+import com.example.attendance.service.*;
 import com.example.attendance.user.UserCreateForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -35,6 +29,8 @@ public class viewController {
     private final AttendanceService attendanceService;
     private final NoticeService noticeService;
     private final AnnualService annualService;
+
+    private final BgAttendanceService bgService;
 
 
     //-----------------유저 로그인 화면 반환---------------------//
@@ -196,6 +192,32 @@ public class viewController {
         model.addAttribute("todayState",todayState);
         model.addAttribute("user",user);
         return "bgAttendance/user_bg_attendance_create";
+    }
+
+    //---------------------- 외근신청내역 --------------------------//
+    @GetMapping("/user/bg/enroll/list")
+    public String bgEnrollRequest(Model model , Principal principal,@RequestParam(value = "page",defaultValue = "0")int page){
+        SiteUser user= this.userService.findUser(principal.getName());
+
+        Page<BgAttendance> bgList=this.bgService.getUserList(user,page);
+
+        boolean todayState ;
+        if(attendanceService.getNowAttendance(user)==null){
+            todayState = false;
+        }else if ((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()== null) ) {
+            todayState = true;
+            model.addAttribute("startWorkTime",attendanceService.getNowAttendance(user).getStartWorkTime());
+
+        }else if((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()!= null)){
+            todayState = false;
+        }else {
+            todayState = false;
+        }
+
+        model.addAttribute("todayState",todayState);
+        model.addAttribute("user",user);
+        model.addAttribute("paging",bgList);
+        return "bgAttendance/user_bg_attendance_list";
     }
 
 }
