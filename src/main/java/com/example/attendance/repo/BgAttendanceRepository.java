@@ -13,4 +13,6 @@ import org.springframework.stereotype.Repository;
 public interface BgAttendanceRepository extends MongoRepository<BgAttendance,String> {
 
     Page<BgAttendance> findByUser(Pageable pageable, SiteUser user);
+
+    Page<BgAttendance> findAll(Pageable pageable);
 }

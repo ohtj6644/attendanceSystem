@@ -1,8 +1,10 @@
 package com.example.attendance.controller.view;
 
 import com.example.attendance.entity.Annual;
+import com.example.attendance.entity.BgAttendance;
 import com.example.attendance.entity.SiteUser;
 import com.example.attendance.service.AnnualService;
+import com.example.attendance.service.BgAttendanceService;
 import com.example.attendance.service.UserService;
 import com.example.attendance.user.UserCreateForm;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ public class AdminView {
 
     private final UserService userService;
     private final AnnualService annualService;
+    private final BgAttendanceService bgAttendanceService;
 
 
     //----------------유저 회원가입 화면 반환 ------------------//
@@ -70,6 +73,23 @@ public class AdminView {
         return "/admin/admin_annual_enroll_list";
 
     }
+
+
+    //----------------외근신청 현황 목록 화면 반환 ------------------//
+    @GetMapping("/admin/bg/attendance/list")
+    @PreAuthorize("isAuthenticated()")
+    public String getBgAttendancelList(Model model, Principal principal, @RequestParam(value = "page",defaultValue = "0")int page){
+
+        SiteUser user = userService.findUser(principal.getName());
+        Page<BgAttendance> BgList = this.bgAttendanceService.getBgAttendancelList(page);
+
+        model.addAttribute("user",user);
+        model.addAttribute("paging",BgList);
+
+        return "/admin/admin_annual_enroll_list";
+
+    }
+
 
 
 

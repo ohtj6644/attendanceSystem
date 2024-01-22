@@ -52,4 +52,12 @@ public class BgAttendanceService {
         return this.BgRepo.findByUser(pageable, user);
 
     }
+
+    public Page<BgAttendance> getBgAttendancelList(int page){
+        List<Sort.Order> sorts=new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page,15,Sort.by(sorts));
+        return this.BgRepo.findAll(pageable);
+
+    }
 }

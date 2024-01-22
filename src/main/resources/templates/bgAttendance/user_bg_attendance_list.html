@@ -36,10 +36,10 @@
             <td th:text="${bg.bgDate}"></td>
             <td th:text="${bg.approval}"></td>
             <td>
-                <p th:if="${annual.approvalUser}" th:text="${annual.approvalUser.username}"></p>
-                <p th:unless="${annual.approvalUser}">결제 전</p>
+                <p th:if="${bg.approvalUser}" th:text="${bg.approvalUser.username}"></p>
+                <p th:unless="${bg.approvalUser}">결제 전</p>
             </td>
-            <td th:text="${annual.area}"></td>
+            <td th:text="${bg.area}"></td>
             <td>
                 <button  type="button" class="bg_cancel_btn btn btn-success"  th:if="${bg.approval== '신청'}" th:value="${bg.id}" >신청취소</button>
             </td>
