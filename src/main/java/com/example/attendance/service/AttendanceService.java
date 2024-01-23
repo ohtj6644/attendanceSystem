@@ -3,6 +3,7 @@ package com.example.attendance.service;
 
 import com.example.attendance.entity.Annual;
 import com.example.attendance.entity.Attendance;
+import com.example.attendance.entity.BgAttendance;
 import com.example.attendance.entity.SiteUser;
 import com.example.attendance.repo.AttendanceRepository;
 import com.example.attendance.repo.UserRepository;
@@ -121,6 +122,29 @@ public class AttendanceService {
         attendance.setWorkTime(hours+minutes);
         this.attenRepo.save(attendance);
     }
+
+
+    //-------------------외근사용 근태 생성 --------------------------//
+    public void  bgEnrollOk(BgAttendance bgAttendance){
+        Attendance attendance = new Attendance();
+        attendance.setId(LocalDate.now().toString()+bgAttendance.getUser().getUsername());
+        attendance.setUser(bgAttendance.getUser());
+        attendance.setStartWorkTime(bgAttendance.getBgDate().atTime( 9,00));
+        attendance.setEndWorkTime(bgAttendance.getBgDate().atTime(18,00));
+        attendance.setAttendanceType("외근");
+
+        Duration duration=Duration.between(attendance.getStartWorkTime(),attendance.getEndWorkTime());
+
+        int hours= duration.toHoursPart()*60;
+        int minutes = duration.toMinutesPart();
+
+        //구한 시간차를 근무시간에 저장.
+        attendance.setWorkTime(hours+minutes);
+        this.attenRepo.save(attendance);
+    }
+
+
+
 
 
 }

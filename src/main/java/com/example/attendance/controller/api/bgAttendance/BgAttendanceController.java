@@ -4,6 +4,7 @@ package com.example.attendance.controller.api.bgAttendance;
 import com.example.attendance.entity.Annual;
 import com.example.attendance.entity.BgAttendance;
 import com.example.attendance.entity.SiteUser;
+import com.example.attendance.service.AttendanceService;
 import com.example.attendance.service.BgAttendanceService;
 import com.example.attendance.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,8 @@ public class BgAttendanceController {
     private final BgAttendanceService bgService;
 
     private final UserService userService;
+
+    private final AttendanceService attendanceService;
 
     //---------------------------외근신청-----------------------------------//
     @PostMapping("/bgAttendance/enroll")
@@ -79,5 +82,43 @@ public class BgAttendanceController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("오류가 발생했습니다. 오류::" + e);
         }
+    }
+
+
+
+    //---------------------------외근승인 -----------------------------------//
+    @GetMapping("/admin/bg/attendance/ok/{id}")
+    public ResponseEntity<String> annualEnrollOk(Principal principal, @PathVariable("id")String id){
+        SiteUser user = userService.findUser(principal.getName());
+        //접속자정보로 유저정보 검색
+        BgAttendance bgAttendance = this.bgService.getBgOne(id);
+        //연차신청 id 정보로 연차신청내역 검색
+        try {
+            this.bgService.bgEnrollOk(bgAttendance,user);
+            this.attendanceService.bgEnrollOk(bgAttendance);
+            return ResponseEntity.ok("외근이 승인 되었습니다.");
+
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("오류가 발생했습니다. 오류::"+e);
+        }
+
+    }
+
+    //---------------------------연차반려 -----------------------------------//
+
+    @GetMapping("/admin/bg/attendance/no/{id}")
+    public ResponseEntity<String> annualEnrollNo(Principal principal, @PathVariable("id")String id){
+        SiteUser user = userService.findUser(principal.getName());
+        //접속자정보로 유저정보 검색
+        BgAttendance bgAttendance= this.bgService.getBgOne(id);
+        //연차신청 id 정보로 연차신청내역 검색
+        try {
+            this.bgService.bgEnrollNo(bgAttendance,user);
+            return ResponseEntity.ok("연차가 반려 되었습니다.");
+
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("오류가 발생했습니다. 오류::"+e);
+        }
+
     }
 }

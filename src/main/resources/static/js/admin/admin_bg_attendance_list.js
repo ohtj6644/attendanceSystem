@@ -5,12 +5,12 @@ $(document).ready(function () {
         var usersForm = $(this).closest('.uniqueBg');
 
         // 해당 부모 요소 내에서 enroll_ok_btn 의 값을 가져옵니다.
-        var annualId = usersForm.find(".bg_ok_btn").val();
+        var bgId = usersForm.find(".bg_ok_btn").val();
 
         // 서버에 AJAX 요청 보내기
         $.ajax({
             type: "GET",
-            url: ""+annualId,
+            url: "/admin/bg/attendance/ok/"+bgId,
             success: function (data) {
                 // 성공 시 팝업 창에 결과 표시
                 alert(data);
@@ -39,12 +39,12 @@ $(document).ready(function () {
         var enrollForm = $(this).closest('.uniqueBg');
 
         // 해당 부모 요소 내에서 enroll_ok_btn 의 값을 가져옵니다.
-        var annualId = enrollForm.find(".bg_no_btn").val();
+        var bgId = enrollForm.find(".bg_no_btn").val();
 
         // 서버에 AJAX 요청 보내기
         $.ajax({
             type: "GET",
-            url: ""+annualId,
+            url: "/admin/bg/attendance/no/"+bgId,
             success: function (data) {
                 // 성공 시 팝업 창에 결과 표시
                 alert(data);

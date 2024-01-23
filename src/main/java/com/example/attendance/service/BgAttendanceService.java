@@ -60,4 +60,19 @@ public class BgAttendanceService {
         return this.BgRepo.findAll(pageable);
 
     }
+
+    //--------------------외근 승인 -----------------------//
+    public void bgEnrollOk(BgAttendance bgAttendance , SiteUser user){
+        bgAttendance.setApproval("승인");
+        bgAttendance.setApprovalUser(user);
+        this.BgRepo.save(bgAttendance);
+    }
+
+
+    //--------------------외근 반려 -----------------------//
+    public void bgEnrollNo(BgAttendance bgAttendance, SiteUser user){
+        bgAttendance.setApprovalUser(user);
+        bgAttendance.setApproval("반려");
+        this.BgRepo.save(bgAttendance);
+    }
 }
