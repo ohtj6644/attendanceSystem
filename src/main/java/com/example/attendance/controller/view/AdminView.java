@@ -86,7 +86,7 @@ public class AdminView {
         model.addAttribute("user",user);
         model.addAttribute("paging",BgList);
 
-        return "/admin/admin_annual_enroll_list";
+        return "/admin/admin_bg_attendance_list";
 
     }
 

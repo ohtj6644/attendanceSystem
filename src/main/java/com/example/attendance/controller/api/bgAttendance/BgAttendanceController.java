@@ -114,7 +114,7 @@ public class BgAttendanceController {
         //연차신청 id 정보로 연차신청내역 검색
         try {
             this.bgService.bgEnrollNo(bgAttendance,user);
-            return ResponseEntity.ok("연차가 반려 되었습니다.");
+            return ResponseEntity.ok("외근신청이  반려 되었습니다.");
 
         }catch (Exception e){
             return ResponseEntity.badRequest().body("오류가 발생했습니다. 오류::"+e);

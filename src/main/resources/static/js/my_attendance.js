@@ -68,7 +68,7 @@ $(document).ready(function () {
                     "<td>" + startdDate + "</td>" +
                     "<td>" + endDate + "</td>" +
                     "<td>" + parseInt(attendance.workTime/60) + "시간" + attendance.workTime%60+"분" + "</td>" +
-                    "<td>" + attendance.annual + "</td>" +
+                    "<td>" + attendance.attendanceType + "</td>" +
                     "</tr>";
 
                 tableBody.append(row);

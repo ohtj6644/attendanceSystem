@@ -24,5 +24,5 @@ public interface AttendanceRepository extends MongoRepository<Attendance, String
 
     List<Attendance> findByStartWorkTimeBetween(LocalDateTime start, LocalDateTime end);
 
-    Page<Attendance> findByStartWorkTimeBetweenAndUser(LocalDate startDate, LocalDate endDate, SiteUser user, Pageable pageable);
+    Page<Attendance> findByStartWorkTimeBetweenAndUser(LocalDateTime startDate, LocalDateTime endDate, SiteUser user, Pageable pageable);
 }

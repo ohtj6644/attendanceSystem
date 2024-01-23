@@ -76,7 +76,7 @@ public class AttendanceController {
         System.out.println("~"+endDateString+"열람자:"+user.getUsername()+"========");
         // 받은 데이터 정상여부 확인하려고 데이터 출력 만듬
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDate = LocalDate.parse(startDateString,formatter);
         LocalDate endDate = LocalDate.parse(endDateString,formatter);
         //fomatter 를 이용하여 받은 String 값 LocalDate 로 변환.
