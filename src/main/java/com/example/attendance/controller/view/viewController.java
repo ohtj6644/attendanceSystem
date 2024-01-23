@@ -220,4 +220,29 @@ public class viewController {
         return "bgAttendance/user_bg_attendance_list";
     }
 
+    @GetMapping("/user/annual/page")
+    public String getUserAnnualPage(Model model , Principal principal){
+
+        SiteUser user= this.userService.findUser(principal.getName());
+
+
+        boolean todayState ;
+        if(attendanceService.getNowAttendance(user)==null){
+            todayState = false;
+        }else if ((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()== null) ) {
+            todayState = true;
+            model.addAttribute("startWorkTime",attendanceService.getNowAttendance(user).getStartWorkTime());
+
+        }else if((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()!= null)){
+            todayState = false;
+        }else {
+            todayState = false;
+        }
+
+        model.addAttribute("todayState",todayState);
+        model.addAttribute("user",user);
+
+        return "annual/user_annual_page";
+    }
+
 }
