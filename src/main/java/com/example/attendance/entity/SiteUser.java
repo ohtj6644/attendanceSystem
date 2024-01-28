@@ -62,13 +62,13 @@ public class SiteUser {
 
 
     private int AnnualCount;
-    //잔여 휴가 개수
+    //총 휴가 개수
 
     private int useAnnal;
     //사용한 휴가 개수
 
     private int YearAnnalCount;
-    //잔여 연차 개수
+    //총 연차 개수
 
     private int useYearAnnal;
     //사용한 연차 개수

@@ -18,6 +18,31 @@
 
 <div class="container" style="text-align: center">
 
+
+    <div class="pricing pricing-theme">
+        <div class="pricing-item">
+            <h3 class="pricing-title">총 연차 수</h3>
+            <div class="pricing-count" th:text="${user.AnnualCount + user.YearAnnalCount}">150</div>
+
+        </div><!-- .pricing-item -->
+
+        <div class="pricing-item">
+            <h3 class="pricing-title">사용한 연차 수 </h3>
+            <div class="pricing-count" th:text="${user.useAnnal + user.useYearAnnal}">300</div>
+
+        </div><!-- .pricing-item -->
+
+        <div class="pricing-item">
+            <h3 class="pricing-title">남은 연차 수</h3>
+            <div class="pricing-count" th:text="${user.AnnualCount + user.YearAnnalCount - user.useAnnal - user.useYearAnnal}">450</div>
+
+        </div><!-- .pricing-item -->
+
+    </div><!-- .pricing .pricing-theme -->
+
+
+
+
 </div>
 
 <script src="/js/layout/nav_side.js"></script>
