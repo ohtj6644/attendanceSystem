@@ -196,6 +196,7 @@ public class viewController {
 
     //---------------------- 외근신청내역 --------------------------//
     @GetMapping("/user/bg/enroll/list")
+    @PreAuthorize("isAuthenticated()")
     public String bgEnrollRequest(Model model , Principal principal,@RequestParam(value = "page",defaultValue = "0")int page){
         SiteUser user= this.userService.findUser(principal.getName());
 
@@ -221,6 +222,8 @@ public class viewController {
     }
 
     @GetMapping("/user/annual/page")
+    @PreAuthorize("isAuthenticated()")
+
     public String getUserAnnualPage(Model model , Principal principal){
 
         SiteUser user= this.userService.findUser(principal.getName());
@@ -242,7 +245,40 @@ public class viewController {
         model.addAttribute("todayState",todayState);
         model.addAttribute("user",user);
 
+
         return "annual/user_annual_page";
     }
+
+
+
+
+
+    //////////////////구성원 리스트 반환 ////////////////////////////
+    @GetMapping("/user/member/list")
+    @PreAuthorize("isAuthenticated()")
+    public String userMemberList(Model model , Principal principal, @RequestParam(value = "page",defaultValue = "0")int page){
+        SiteUser user= this.userService.findUser(principal.getName());
+
+        Page<SiteUser> userList = this.userService.getList(page);
+        boolean todayState ;
+        if(attendanceService.getNowAttendance(user)==null){
+            todayState = false;
+        }else if ((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()== null) ) {
+            todayState = true;
+            model.addAttribute("startWorkTime",attendanceService.getNowAttendance(user).getStartWorkTime());
+
+        }else if((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()!= null)){
+            todayState = false;
+        }else {
+            todayState = false;
+        }
+
+        model.addAttribute("todayState",todayState);
+        model.addAttribute("user",user);
+        model.addAttribute("paging",userList);
+        return "member/user_member_list";
+    }
+
+
 
 }

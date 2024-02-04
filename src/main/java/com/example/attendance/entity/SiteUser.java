@@ -73,5 +73,7 @@ public class SiteUser {
     private int useYearAnnal;
     //사용한 연차 개수
 
+    private String avatarUrl="/file/default-avatar.jpg";
+    //프로필사진
 
 }
