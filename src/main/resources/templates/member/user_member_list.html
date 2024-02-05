@@ -30,8 +30,8 @@
     <div class="col-xs-10 col-lg-12">
       <div class="container">
         <div class="form-group">
-          <input type=search placeholder=Search class=form-control>
-          <button  class="btn btn-success" type="button">구성원 검색</button>
+          <input type="search" placeholder="Search" class="form-control" id="keyword">
+          <button  class="btn btn-success" type="button" id="searchBtn">구성원 검색</button>
         </div>
         <div class="row">
           <div class="col-sm-12">
@@ -42,7 +42,7 @@
             <h3>Member List</h3>
             <ul class="list">
               <li class="list-item" v-for="member in members" th:each="users : ${paging}">
-                <img :src="users.avatarUrl" height="100" width="100" :alt="member.login" class="img-circle  center-block" />
+                <img th:src="${users.avatarUrl}" height="100" width="100" :alt="member.login" class="img-circle  center-block" />
                 <h1 th:text="${users.realName}"></h1>
               </li>
             </ul>

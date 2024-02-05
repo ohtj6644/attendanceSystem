@@ -130,4 +130,8 @@ public class UserService {
         this.userRepo.save(siteUser);
     }
 
+
+    public List<SiteUser> getSearchList(String keyword){
+        return this.userRepo.findByRealNameLike(keyword);
+    }
 }
