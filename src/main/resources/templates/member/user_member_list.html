@@ -42,8 +42,9 @@
             <h3>구성원</h3>
             <ul class="list">
               <li class="list-item" v-for="member in members" th:each="users : ${paging}">
-                <img th:src="${users.avatarUrl}" height="100" width="100" :alt="member.login" class="img-circle  center-block" />
-                <h1 th:text="${users.realName}"></h1>
+                <img th:if="${users.avatarUrl == null}" th:src="'/file/default-avatar.jpg'" height="100" width="100" alt="${member.login}" class="img-circle center-block" />
+                <img th:if="${users.avatarUrl != null}" th:src="${users.avatarUrl}" height="100" width="100" alt="${member.login}" class="img-circle center-block" />
+                <h3 th:text="${users.realName}"></h3>
               </li>
             </ul>
           </div>

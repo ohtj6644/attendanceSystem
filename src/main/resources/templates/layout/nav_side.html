@@ -30,7 +30,8 @@
     <nav id="sideNavParent" class="pdsa-sn-wrapper">
         <ul id="sideNavParent">
             <li style="text-align: center;">
-                <img th:src="${user.avatarUrl}" height="100" width="100" :alt="member.login" class="img-circle  center-block" />
+                <img th:if="${user.avatarUrl == null}" th:src="'/file/default-avatar.jpg'" height="100" width="100" alt="${member.login}" class="img-circle center-block" />
+                <img th:if="${user.avatarUrl != null}" th:src="${user.avatarUrl}" height="100" width="100" alt="${member.login}" class="img-circle center-block" />
                 <h3  class="hidden-xs" th:text="${user.realName}"></h3>
             </li>
             <li class="pdsa-sn-brand" th:if="${!todayState}">
