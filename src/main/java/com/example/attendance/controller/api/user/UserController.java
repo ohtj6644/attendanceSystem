@@ -5,17 +5,23 @@ import com.example.attendance.service.UserService;
 import com.example.attendance.entity.SiteUser;
 import com.example.attendance.user.UserCreateForm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 
 @RestController
@@ -103,6 +109,59 @@ public class UserController {
             this.userService.newUser("userTest"+i,"1234","테스트유저"+i, LocalDateTime.now());
         }
         return "테스트유저 생성완료";
+    }
+
+    //--------------------프로필 업데이트---------------------//
+    @PostMapping("/profile/upload")
+    public ResponseEntity<String> profileUpload(@RequestPart("file") MultipartFile file,Principal principal) {
+
+        SiteUser user = this.userService.findUser(principal.getName());
+        try {
+            // static/file/profile 경로 설정
+            Path uploadPath = Paths.get("static/file/profile/");
+
+            // 경로에 디렉토리가 존재하지 않으면 생성
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+
+            String randomFileName = generateRandomFileName(12);
+
+            // 확장자를 포함한 새로운 파일 이름
+            String newFileName = randomFileName + getFileExtension(file.getOriginalFilename());
+
+            if(getFileExtension(file.getOriginalFilename()).equalsIgnoreCase(".jpg")){
+                return new ResponseEntity<>("jpg 만 등록 가능합니다.",HttpStatus.BAD_REQUEST);
+            }
+
+            // 업로드할 파일의 경로를 설정
+            Path filePath = uploadPath.resolve(newFileName);
+
+            // 파일을 지정된 경로로 저장
+            Files.write(filePath, file.getBytes());
+
+            String avatarUrl = "/file/profile/"+file.getOriginalFilename();
+            this.userService.setUserAvatarUrl(user,avatarUrl);
+
+
+            // 성공적인 응답 반환
+            return new ResponseEntity<>("프로필 사진이 변경되었습니다", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 에러 발생 시 실패 응답 반환
+            return new ResponseEntity<>("프로필사진 변경 오류 (관리자에게 문의 하세요)", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //--------------------파일 이름을 12자리 랜덤 문자열로 생성---------------------//
+    private String generateRandomFileName(int length) {
+        return UUID.randomUUID().toString().replaceAll("-", "").substring(0, length);
+    }
+
+    //--------------------파일의 확장자를 반환---------------------//드
+    private String getFileExtension(String fileName) {
+        int lastDotIndex = fileName.lastIndexOf(".");
+        return lastDotIndex == -1 ? "" : fileName.substring(lastDotIndex);
     }
 
 

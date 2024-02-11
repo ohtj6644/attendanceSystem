@@ -134,4 +134,12 @@ public class UserService {
     public List<SiteUser> getSearchList(String keyword){
         return this.userRepo.findByRealNameLike(keyword);
     }
+
+
+    //--------------------------프로필파일 설정-----------------------------------//
+    public void  setUserAvatarUrl(SiteUser user , String avatarUrl){
+        user.setAvatarUrl(avatarUrl);
+        this.userRepo.save(user);
+
+    }
 }

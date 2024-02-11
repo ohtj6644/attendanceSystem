@@ -122,4 +122,39 @@ window.onload = startTimer;
 
 
 
+ $(document).ready(function() {
+     // 이미지가 클릭되었을 때
+     $('.clickable').click(function() {
+       // 파일 입력 요소 클릭
+       $('#fileInput').click();
+     });
 
+     // 파일 입력이 변경되었을 때
+     $('#fileInput').change(function() {
+       // FormData 객체 생성
+       var formData = new FormData();
+
+       // 선택된 파일 추가
+       formData.append('file', $('#fileInput')[0].files[0]);
+
+       // AJAX 요청 설정
+       $.ajax({
+         type: 'POST',
+         url: '/profile/upload',
+         data: formData,
+         contentType: false,
+         processData: false,
+         success: function(response) {
+           // 성공 시의 동작
+           console.log('프로필 업로드 성공', response);
+            alert('프로필이 변경 되었습니다.');
+            location.reload(true);
+         },
+         error: function(error) {
+           // 실패 시의 동작
+           console.error('파일 업로드 실패', error);
+           alert('프로필 업로드 실패');
+         }
+       });
+     });
+   });

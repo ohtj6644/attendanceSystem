@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 </head>
 
 <body>
@@ -29,10 +31,11 @@
     </div>
     <nav id="sideNavParent" class="pdsa-sn-wrapper">
         <ul id="sideNavParent">
-            <li style="text-align: center;">
-                <img th:if="${user.avatarUrl == null}" th:src="'/file/default-avatar.jpg'" height="100" width="100" alt="${member.login}" class="img-circle center-block" />
-                <img th:if="${user.avatarUrl != null}" th:src="${user.avatarUrl}" height="100" width="100" alt="${member.login}" class="img-circle center-block" />
-                <h3  class="hidden-xs" th:text="${user.realName}"></h3>
+            <li style="text-align: center;" class="profileBox">
+                <img th:if="${user.avatarUrl == null}" th:src="'/file/default-avatar.jpg'" height="100" width="100" alt="${member.login}" class="img-circle center-block clickable" style="cursor:pointer" />
+                <img th:if="${user.avatarUrl != null}" th:src="${user.avatarUrl}" height="100" width="100" alt="${member.login}" class="img-circle center-block clickable" style="cursor:pointer" />
+                <h3 class="hidden-xs" th:text="${user.realName}"></h3>
+                <input type="file" id="fileInput" style="display: none;" onchange="handleFileSelect()" />
             </li>
             <li class="pdsa-sn-brand" th:if="${!todayState}">
                 <a  class="btn btn-success" id="startWork">▶ 근무시작</a>
