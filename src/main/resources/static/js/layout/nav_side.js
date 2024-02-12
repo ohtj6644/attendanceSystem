@@ -144,16 +144,16 @@ window.onload = startTimer;
          data: formData,
          contentType: false,
          processData: false,
-         success: function(response) {
+         success: function(data) {
            // 성공 시의 동작
-           console.log('프로필 업로드 성공', response);
-            alert('프로필이 변경 되었습니다.');
+           console.log('프로필 업로드 성공', data);
+            alert(data);
             location.reload(true);
          },
          error: function(error) {
            // 실패 시의 동작
            console.error('파일 업로드 실패', error);
-           alert('프로필 업로드 실패');
+           alert("에러:"+error);
          }
        });
      });

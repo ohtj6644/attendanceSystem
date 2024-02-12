@@ -130,9 +130,6 @@ public class UserController {
             // 확장자를 포함한 새로운 파일 이름
             String newFileName = randomFileName + getFileExtension(file.getOriginalFilename());
 
-            if(getFileExtension(file.getOriginalFilename()).equalsIgnoreCase(".jpg")){
-                return new ResponseEntity<>("jpg 만 등록 가능합니다.",HttpStatus.BAD_REQUEST);
-            }
 
             // 업로드할 파일의 경로를 설정
             Path filePath = uploadPath.resolve(newFileName);
@@ -140,16 +137,16 @@ public class UserController {
             // 파일을 지정된 경로로 저장
             Files.write(filePath, file.getBytes());
 
-            String avatarUrl = "/file/profile/"+file.getOriginalFilename();
+            String avatarUrl = "/file/profile/"+newFileName;
             this.userService.setUserAvatarUrl(user,avatarUrl);
 
 
             // 성공적인 응답 반환
-            return new ResponseEntity<>("프로필 사진이 변경되었습니다", HttpStatus.OK);
+            return ResponseEntity.ok("프로필 사진이 변경되었습니다");
         } catch (Exception e) {
             e.printStackTrace();
             // 에러 발생 시 실패 응답 반환
-            return new ResponseEntity<>("프로필사진 변경 오류 (관리자에게 문의 하세요)", HttpStatus.INTERNAL_SERVER_ERROR);
+            return  ResponseEntity.badRequest().body("프로필사진 변경 오류 (관리자에게 문의 하세요)");
         }
     }
 
