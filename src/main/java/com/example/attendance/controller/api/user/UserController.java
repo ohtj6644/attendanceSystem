@@ -1,6 +1,7 @@
 package com.example.attendance.controller.api.user;
 
 
+import com.example.attendance.service.FileService;
 import com.example.attendance.service.UserService;
 import com.example.attendance.entity.SiteUser;
 import com.example.attendance.user.UserCreateForm;
@@ -29,6 +30,8 @@ import java.util.UUID;
 public class UserController {
 
     private  final UserService userService;
+
+    private final FileService fileService;
 
 
     //---------------------------유저생성---------------------------////
@@ -125,10 +128,10 @@ public class UserController {
                 Files.createDirectories(uploadPath);
             }
 
-            String randomFileName = generateRandomFileName(12);
+            String randomFileName = this.fileService.generateRandomFileName(12);
 
             // 확장자를 포함한 새로운 파일 이름
-            String newFileName = randomFileName + getFileExtension(file.getOriginalFilename());
+            String newFileName = randomFileName + this.fileService.getFileExtension(file.getOriginalFilename());
 
 
             // 업로드할 파일의 경로를 설정
@@ -150,16 +153,9 @@ public class UserController {
         }
     }
 
-    //--------------------파일 이름을 12자리 랜덤 문자열로 생성---------------------//
-    private String generateRandomFileName(int length) {
-        return UUID.randomUUID().toString().replaceAll("-", "").substring(0, length);
-    }
 
-    //--------------------파일의 확장자를 반환---------------------//드
-    private String getFileExtension(String fileName) {
-        int lastDotIndex = fileName.lastIndexOf(".");
-        return lastDotIndex == -1 ? "" : fileName.substring(lastDotIndex);
-    }
+
+
 
 
 
