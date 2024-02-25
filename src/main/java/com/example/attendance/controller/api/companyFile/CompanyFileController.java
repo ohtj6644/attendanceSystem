@@ -77,25 +77,30 @@ public class CompanyFileController {
 
         if (fileUrl != null && !fileUrl.isEmpty()) {
             try {
-                // 파일 경로를 사용하여 파일 객체 생성
-                File fileToDelete = new File(fileUrl);
+                // 파일 경로를 사용하여 Path 객체 생성
+                Path filePath = Paths.get("static", fileUrl);
+                // first 에 상위폴더를 지정해줌
 
                 // 파일이 존재하면 삭제
-                if (fileToDelete.exists()) {
-                    if (fileToDelete.delete()) {
+                if (Files.exists(filePath)) {
+                    try {
+                        Files.delete(filePath);
+
                         // 파일 삭제 성공
                         this.companyFileService.companyFileDelete(companyFile);
                         return ResponseEntity.ok("문서 및 파일이 삭제되었습니다.");
-                    } else {
-                        // 파일 삭제 실패
-                        return ResponseEntity.ok("파일 삭제 실패");
+                    }catch (Exception e){
+                        return ResponseEntity.ok(e+"삭제실패 오류");
                     }
+                    // 파일 삭제 시도
+
                 } else {
                     // 파일이 존재하지 않음
-                    return ResponseEntity.ok("파일을 찾을 수 없습니다.");
+                    return ResponseEntity.ok("파일을 찾을 수 없습니다. (상대 경로: " + fileUrl + ")");
                 }
             } catch (Exception e) {
                 // 예외 발생 시
+                e.printStackTrace(); // 디버깅을 위해 이 줄을 추가합니다.
                 return ResponseEntity.ok("파일 삭제 중 오류 발생");
             }
         } else {
