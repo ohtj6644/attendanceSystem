@@ -32,6 +32,8 @@ public class viewController {
 
     private final BgAttendanceService bgService;
 
+    private final CompanyFileService companyFileService;
+
 
     //-----------------유저 로그인 화면 반환---------------------//
     @GetMapping("/user/login")
@@ -279,6 +281,32 @@ public class viewController {
         return "member/user_member_list";
     }
 
+
+    //////////////////회사문서 리스트 반환 ////////////////////////////
+    @GetMapping("/companyFile/list")
+    @PreAuthorize("isAuthenticated()")
+    public String companyFileList(Model model , Principal principal, @RequestParam(value = "page",defaultValue = "0")int page){
+        SiteUser user= this.userService.findUser(principal.getName());
+
+        Page<CompanyFile> companyFiles = this.companyFileService.getCompanyFileList(page);
+        boolean todayState ;
+        if(attendanceService.getNowAttendance(user)==null){
+            todayState = false;
+        }else if ((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()== null) ) {
+            todayState = true;
+            model.addAttribute("startWorkTime",attendanceService.getNowAttendance(user).getStartWorkTime());
+
+        }else if((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()!= null)){
+            todayState = false;
+        }else {
+            todayState = false;
+        }
+
+        model.addAttribute("todayState",todayState);
+        model.addAttribute("user",user);
+        model.addAttribute("paging",companyFiles);
+        return "companyFile/companyFile_list";
+    }
 
 
 }

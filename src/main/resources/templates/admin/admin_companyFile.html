@@ -32,7 +32,6 @@
   <table class="table table-bordered table-hover table-striped" style="background-color: #d9fbd9;">
     <thead>
     <tr>
-      <th>문서 번호</th>
       <th>문서 이름</th>
       <th>업로드 일자</th>
       <th>삭제</th>
@@ -41,7 +40,6 @@
     <tbody id="attendanceBoard">
     <!-- 수정된 부분: 데이터가 있을 때와 없을 때를 나누지 않고, 바로 리스트 출력 -->
     <tr class="uniqueFile" th:each="files, loop : ${paging}">
-      <td th:text="${files.id}"></td>
       <td th:text="${files.fileName}"></td>
       <td th:text="${files.createDate}"></td>
       <td >

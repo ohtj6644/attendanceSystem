@@ -6,13 +6,13 @@ $(document).ready(function () {
         var text = $('#uploadName').val();
         // 선택된 파일 추가
         var formData = new FormData();
-        formData.append('file', $('#fileInput')[0].files[0]);
+        formData.append('file', $('#uploadFile')[0].files[0]);
         formData.append('text', text); // text 데이터 추가
 
         // AJAX 요청 설정
         $.ajax({
             type: 'POST',
-            url: 'admin/companyFile/upload',
+            url: '/admin/companyFile/upload',
             data: formData,
             contentType: false,
             processData: false,

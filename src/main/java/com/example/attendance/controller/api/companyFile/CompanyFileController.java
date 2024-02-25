@@ -31,7 +31,7 @@ public class CompanyFileController {
 
 
     //--------------------회사 문서 추가---------------------//
-    @PostMapping("admin/companyFile/upload")
+    @PostMapping("/admin/companyFile/upload")
     public ResponseEntity<String> companyFileUpload(@RequestPart("file") MultipartFile file, @RequestPart("text") String fileName, Principal principal) {
 
         try {
@@ -70,7 +70,7 @@ public class CompanyFileController {
 
 
     //--------------------회사 문서 삭제---------------------//
-    @GetMapping("admin/companyFile/delete/{id}")
+    @GetMapping("/admin/companyFile/delete/{id}")
     public ResponseEntity<String> companyFileDelete(@PathVariable("id")String id){
         CompanyFile companyFile = this.companyFileService.getCompanyFile(id);
         String fileUrl = companyFile.getFileUrl();
@@ -88,19 +88,19 @@ public class CompanyFileController {
                         return ResponseEntity.ok("문서 및 파일이 삭제되었습니다.");
                     } else {
                         // 파일 삭제 실패
-                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("파일 삭제 실패");
+                        return ResponseEntity.ok("파일 삭제 실패");
                     }
                 } else {
                     // 파일이 존재하지 않음
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("파일을 찾을 수 없습니다.");
+                    return ResponseEntity.ok("파일을 찾을 수 없습니다.");
                 }
             } catch (Exception e) {
                 // 예외 발생 시
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("파일 삭제 중 오류 발생");
+                return ResponseEntity.ok("파일 삭제 중 오류 발생");
             }
         } else {
             // fileUrl이 비어있는 경우
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("유효한 파일 경로가 없습니다.");
+            return ResponseEntity.ok("유효한 파일 경로가 없습니다.");
         }
 
 

@@ -97,7 +97,7 @@ public class AdminView {
 
 
 
-    //----------------연차신청 현황 목록 화면 반환 ------------------//
+    //----------------회사문서 업로드 화면반환 ------------------//
     @GetMapping("/admin/companyFile/upload")
     @PreAuthorize("isAuthenticated()")
     public String companyFileUpload(Model model, Principal principal, @RequestParam(value = "page",defaultValue = "0")int page){
@@ -108,9 +108,11 @@ public class AdminView {
         model.addAttribute("user",user);
         model.addAttribute("paging",companyFileList);
 
-        return "/admin/admin_annual_enroll_list";
+        return "/admin/admin_companyFile";
 
     }
+
+    //-
 
 
 
