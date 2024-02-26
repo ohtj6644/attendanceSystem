@@ -27,19 +27,22 @@ public class CompanyFileService {
 
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
-        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        Pageable pageable = PageRequest.of(page, 6, Sort.by(sorts));
         return this.companyFileRepo.findAll(pageable);
 
     }
 
-    public void createCompanyFile(String fileName, String fileUrl) {
+    public void createCompanyFile(String fileName, String filePath, String thumbnailUrl) {
         CompanyFile companyFile = new CompanyFile();
         companyFile.setFileName(fileName);
-        companyFile.setFileUrl(fileUrl);
         companyFile.setCreateDate(LocalDate.now());
+
+        companyFile.setFileUrl(filePath.replace('\\', '/'));
+        companyFile.setThumbnailUrl(thumbnailUrl.replace('\\', '/'));
+
+
         this.companyFileRepo.save(companyFile);
     }
-
 
     public CompanyFile getCompanyFile(String id){
         Optional<CompanyFile> temp= this.companyFileRepo.findById(id);

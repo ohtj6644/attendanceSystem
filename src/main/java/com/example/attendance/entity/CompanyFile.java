@@ -28,4 +28,7 @@ public class CompanyFile {
     private String fileUrl;
     // 파일 경로
 
+    private String thumbnailUrl;
+    // 썸네일 경로
+
 }

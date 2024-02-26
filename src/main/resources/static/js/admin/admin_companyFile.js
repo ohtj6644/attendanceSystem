@@ -4,10 +4,13 @@ $(document).ready(function () {
         e.preventDefault(); // 기본 동작 방지 (페이지 이동)
 
         var text = $('#uploadName').val();
-        // 선택된 파일 추가
+
+        // FormData 객체 생성
         var formData = new FormData();
+
+        // 파일 및 텍스트 데이터 추가
         formData.append('file', $('#uploadFile')[0].files[0]);
-        formData.append('text', text); // text 데이터 추가
+        formData.append('text', text);
 
         // AJAX 요청 설정
         $.ajax({
@@ -30,7 +33,6 @@ $(document).ready(function () {
         });
     });
 });
-
 
 
 $(document).ready(function () {

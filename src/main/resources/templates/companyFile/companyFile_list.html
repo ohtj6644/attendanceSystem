@@ -39,7 +39,7 @@
                         <h3>회사 문서</h3>
                         <ul class="list">
                             <li class="list-item"  th:each="files : ${paging}" >
-                                <img  th:src="${files.fileUrl}" class="img-thumbnail center-block" height="300px" width="210px"   />
+                                <img  th:src="${files.thumbnailUrl}" class="img-thumbnail center-block" height="300px" width="210px"   />
                                 <h3 th:text="${files.fileName}"></h3>
                                 <a class="btn btn-success" th:href="${files.fileUrl}" th:download="${files.fileName}" >다운로드</a>
                             </li>
