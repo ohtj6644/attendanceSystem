@@ -32,11 +32,12 @@ public class CompanyFileService {
 
     }
 
-    public void createCompanyFile(String fileName, String filePath, String thumbnailUrl) {
+    public void createCompanyFile(String fileName, String pathtemp, String thumbnailUrl) {
         CompanyFile companyFile = new CompanyFile();
         companyFile.setFileName(fileName);
         companyFile.setCreateDate(LocalDate.now());
 
+        String filePath=pathtemp.replace("static","");
         companyFile.setFileUrl(filePath.replace('\\', '/'));
         companyFile.setThumbnailUrl(thumbnailUrl.replace('\\', '/'));
 
