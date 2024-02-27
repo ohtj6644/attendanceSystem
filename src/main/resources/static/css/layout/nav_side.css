@@ -17,20 +17,30 @@
 
 header {
     padding: .7em;
-    background-color: #eee;
+    background-color: #5cb85c;
     color: white;
     font-size: large;
 }
 
 header a {
-    background-color: #eee;
-    color: white;
+    color: #5cb85c;
 }
 
 header a:hover {
     cursor:pointer;
 }
+#adminBtn , #logout{
+    color:#4cae4c;
+}
+#adminBtn:hover{
+  background-color: #ABF1BD;
+  color:white;
+}
 
+#logout:hover{
+  background-color: #ABF1BD;
+  color:white;
+}
 
 
 .pdsa-sn-wrapper {

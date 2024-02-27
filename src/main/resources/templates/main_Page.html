@@ -39,15 +39,16 @@
                 <div class="message-candidate center-block"  th:each="notice, loop : ${noticeList}">
                     <div class="row">
                         <div class="col-xs-8 col-md-6">
-                            <img src="http://imgc.allpostersimages.com/images/P-473-488-90/68/6896/2GOJ100Z/posters/despicable-me-2-minions-movie-poster.jpg" class="message-photo">
-                            <h4 class="message-name" th:text="${notice.author.username}">Mr. Minion</h4>
+                            <img th:if="${notice.author.avatarUrl == null}" th:src="'/file/default-avatar.jpg'" height="50" width="50" alt="${member.login}" class="img-circle" style="cursor:pointer; margin:0;" />
+                            <img th:if="${notice.author.avatarUrl != null}" th:src="${notice.author.avatarUrl}" height="50" width="50" alt="${member.login}" class="img-circle" style="cursor:pointer; margin:0;" />
+                            <h4 class="message-name" th:text="${notice.author.realName}">Mr. Minion</h4>
                         </div>
                         <div class="col-xs-4 col-md-6 text-right message-date" th:text="${notice.createDate}">Date here</div>
-                        <button type="button" class="btn btn-sm btn-outline-secondary modify-notice-btn"
+                        <button type="button" class="btn btn-success modify-notice-btn"
                                 sec:authorize="isAuthenticated()"  th:if="${user.username == notice.author.username}"
                                 id="modifynotice">수정
                         </button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary delete-notice-btn"
+                        <button type="button" class="btn btn-success delete-notice-btn"
                                 sec:authorize="isAuthenticated()"  th:if="${user.username == notice.author.username}" id="deletenotice"
                                 th:value="${notice.id}">삭제
                         </button>
@@ -69,7 +70,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" id="noticeInput" placeholder="관리자만 등록이 가능합니다.">
                                 <span class="input-group-btn">
-        <button class="btn btn-default" type="button" id="sendNotice">전송</button>
+        <button class="btn btn-default" type="button" id="sendNotice">등록</button>
     </span>
                             </div>
                         </div>
