@@ -82,43 +82,6 @@ $(document).ready(function () {
     });
 });
 
-// Thymeleaf를 사용하여 Java에서 전달한 startWorkTime 값을 가져옴
-var startWorkTime = new Date(/*[[${startWorkTime}]]*/ null);
-
-// 타이머 시작 함수
-function startTimer() {
-    var timerElement = document.getElementById('timer');
-
-    // 타이머 갱신 함수
-    function updateTimer() {
-        // 현재 시간을 가져옴
-        var currentTime = new Date();
-
-        // 경과 시간 계산 (밀리초)
-        var elapsedTimeInMilliseconds = currentTime - startWorkTime;
-
-        // 밀리초를 시간, 분, 초로 변환
-        var seconds = Math.floor(elapsedTimeInMilliseconds / 1000);
-        var minutes = Math.floor(seconds / 60);
-        var hours = Math.floor(minutes / 60);
-
-        // 남은 시간 계산
-        var remainingSeconds = seconds % 60;
-        var remainingMinutes = minutes % 60;
-
-        // 경과 시간을 화면에 표시
-        timerElement.innerHTML = '근무시간 : ' + hours + '시간 ' + remainingMinutes + '분 ' + remainingSeconds + '초';
-
-        // 1초마다 업데이트
-        setTimeout(updateTimer, 1000);
-    }
-
-    // 타이머 시작
-    updateTimer();
-}
-
-// 페이지 로드 후 타이머 시작
-window.onload = startTimer;
 
 
 

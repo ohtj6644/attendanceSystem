@@ -17,7 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -61,30 +65,27 @@ public class viewController {
 
     @GetMapping("/")
     @PreAuthorize("isAuthenticated()")
-    // 로그인이 안된 유저는 메인페이지 접근 시 로그인페이지로 반환.
-    public String mainPage(Model model , Principal principal){
-
-        boolean todayState ;
-
+    public String mainPage(Model model, Principal principal) {
         SiteUser user = userService.findUser(principal.getName());
+
         List<Notice> noticeList = this.noticeService.getList();
 
-        if(attendanceService.getNowAttendance(user)==null){
-            todayState = false;
-        }else if ((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()== null) ) {
-            todayState = true;
-            model.addAttribute("startWorkTime",attendanceService.getNowAttendance(user).getStartWorkTime());
+        Attendance nowAttendance = attendanceService.getNowAttendance(user);
+        boolean todayState = false;
 
-        }else if((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()!= null)){
-            todayState = false;
-        }else {
-            todayState = false;
+        if (nowAttendance != null) {
+            if (nowAttendance.getEndWorkTime() == null) {
+                todayState = true;
+                LocalDateTime nows = nowAttendance.getStartWorkTime();
+                String startWorkTimeString = "근무 시작시간 : "+ nows.getHour() +"시 "+nows.getMinute()+"분";
+
+                model.addAttribute("startWorkTime", startWorkTimeString);
+            }
         }
 
-        model.addAttribute("noticeList",noticeList);
-        model.addAttribute("todayState",todayState);
-        model.addAttribute("user",user);
-
+        model.addAttribute("todayState", todayState);
+        model.addAttribute("noticeList", noticeList);
+        model.addAttribute("user", user);
 
         return "main_Page";
     }
@@ -98,20 +99,20 @@ public class viewController {
         SiteUser user= this.userService.findUser(principal.getName());
 
 
-        boolean todayState ;
-        if(attendanceService.getNowAttendance(user)==null){
-            todayState = false;
-        }else if ((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()== null) ) {
-            todayState = true;
-            model.addAttribute("startWorkTime",attendanceService.getNowAttendance(user).getStartWorkTime());
+        Attendance nowAttendance = attendanceService.getNowAttendance(user);
+        boolean todayState = false;
 
-        }else if((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()!= null)){
-            todayState = false;
-        }else {
-            todayState = false;
+        if (nowAttendance != null) {
+            if (nowAttendance.getEndWorkTime() == null) {
+                todayState = true;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                String startWorkTimeString = nowAttendance.getStartWorkTime().format(formatter);
+
+                model.addAttribute("startWorkTime", startWorkTimeString);
+            }
         }
 
-        model.addAttribute("todayState",todayState);
+        model.addAttribute("todayState", todayState);
         model.addAttribute("user",user);
 
 
@@ -127,20 +128,20 @@ public class viewController {
     public String annualRequest(Model model, Principal principal){
         SiteUser user= this.userService.findUser(principal.getName());
 
-        boolean todayState ;
-        if(attendanceService.getNowAttendance(user)==null){
-            todayState = false;
-        }else if ((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()== null) ) {
-            todayState = true;
-            model.addAttribute("startWorkTime",attendanceService.getNowAttendance(user).getStartWorkTime());
+        Attendance nowAttendance = attendanceService.getNowAttendance(user);
+        boolean todayState = false;
 
-        }else if((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()!= null)){
-            todayState = false;
-        }else {
-            todayState = false;
+        if (nowAttendance != null) {
+            if (nowAttendance.getEndWorkTime() == null) {
+                todayState = true;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                String startWorkTimeString = nowAttendance.getStartWorkTime().format(formatter);
+
+                model.addAttribute("startWorkTime", startWorkTimeString);
+            }
         }
 
-        model.addAttribute("todayState",todayState);
+        model.addAttribute("todayState", todayState);
         model.addAttribute("user",user);
         return "annual/user_annual_create";
     }
@@ -152,20 +153,20 @@ public class viewController {
         SiteUser user= this.userService.findUser(principal.getName());
         Page<Annual> annualList=this.annualService.getUserList(user,page);
 
-        boolean todayState ;
-        if(attendanceService.getNowAttendance(user)==null){
-            todayState = false;
-        }else if ((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()== null) ) {
-            todayState = true;
-            model.addAttribute("startWorkTime",attendanceService.getNowAttendance(user).getStartWorkTime());
+        Attendance nowAttendance = attendanceService.getNowAttendance(user);
+        boolean todayState = false;
 
-        }else if((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()!= null)){
-            todayState = false;
-        }else {
-            todayState = false;
+        if (nowAttendance != null) {
+            if (nowAttendance.getEndWorkTime() == null) {
+                todayState = true;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                String startWorkTimeString = nowAttendance.getStartWorkTime().format(formatter);
+
+                model.addAttribute("startWorkTime", startWorkTimeString);
+            }
         }
 
-        model.addAttribute("todayState",todayState);
+        model.addAttribute("todayState", todayState);
         model.addAttribute("user",user);
         model.addAttribute("paging",annualList);
         return "annual/user_annual_enroll_list";
@@ -178,20 +179,20 @@ public class viewController {
     public String bgRequest(Model model, Principal principal){
         SiteUser user= this.userService.findUser(principal.getName());
 
-        boolean todayState ;
-        if(attendanceService.getNowAttendance(user)==null){
-            todayState = false;
-        }else if ((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()== null) ) {
-            todayState = true;
-            model.addAttribute("startWorkTime",attendanceService.getNowAttendance(user).getStartWorkTime());
+        Attendance nowAttendance = attendanceService.getNowAttendance(user);
+        boolean todayState = false;
 
-        }else if((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()!= null)){
-            todayState = false;
-        }else {
-            todayState = false;
+        if (nowAttendance != null) {
+            if (nowAttendance.getEndWorkTime() == null) {
+                todayState = true;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                String startWorkTimeString = nowAttendance.getStartWorkTime().format(formatter);
+
+                model.addAttribute("startWorkTime", startWorkTimeString);
+            }
         }
 
-        model.addAttribute("todayState",todayState);
+        model.addAttribute("todayState", todayState);
         model.addAttribute("user",user);
         return "bgAttendance/user_bg_attendance_create";
     }
@@ -204,20 +205,20 @@ public class viewController {
 
         Page<BgAttendance> bgList=this.bgService.getUserList(user,page);
 
-        boolean todayState ;
-        if(attendanceService.getNowAttendance(user)==null){
-            todayState = false;
-        }else if ((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()== null) ) {
-            todayState = true;
-            model.addAttribute("startWorkTime",attendanceService.getNowAttendance(user).getStartWorkTime());
+        Attendance nowAttendance = attendanceService.getNowAttendance(user);
+        boolean todayState = false;
 
-        }else if((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()!= null)){
-            todayState = false;
-        }else {
-            todayState = false;
+        if (nowAttendance != null) {
+            if (nowAttendance.getEndWorkTime() == null) {
+                todayState = true;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                String startWorkTimeString = nowAttendance.getStartWorkTime().format(formatter);
+
+                model.addAttribute("startWorkTime", startWorkTimeString);
+            }
         }
 
-        model.addAttribute("todayState",todayState);
+        model.addAttribute("todayState", todayState);
         model.addAttribute("user",user);
         model.addAttribute("paging",bgList);
         return "bgAttendance/user_bg_attendance_list";
@@ -231,20 +232,20 @@ public class viewController {
         SiteUser user= this.userService.findUser(principal.getName());
 
 
-        boolean todayState ;
-        if(attendanceService.getNowAttendance(user)==null){
-            todayState = false;
-        }else if ((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()== null) ) {
-            todayState = true;
-            model.addAttribute("startWorkTime",attendanceService.getNowAttendance(user).getStartWorkTime());
+        Attendance nowAttendance = attendanceService.getNowAttendance(user);
+        boolean todayState = false;
 
-        }else if((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()!= null)){
-            todayState = false;
-        }else {
-            todayState = false;
+        if (nowAttendance != null) {
+            if (nowAttendance.getEndWorkTime() == null) {
+                todayState = true;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                String startWorkTimeString = nowAttendance.getStartWorkTime().format(formatter);
+
+                model.addAttribute("startWorkTime", startWorkTimeString);
+            }
         }
 
-        model.addAttribute("todayState",todayState);
+        model.addAttribute("todayState", todayState);
         model.addAttribute("user",user);
 
 
@@ -262,20 +263,20 @@ public class viewController {
         SiteUser user= this.userService.findUser(principal.getName());
 
         Page<SiteUser> userList = this.userService.getList(page);
-        boolean todayState ;
-        if(attendanceService.getNowAttendance(user)==null){
-            todayState = false;
-        }else if ((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()== null) ) {
-            todayState = true;
-            model.addAttribute("startWorkTime",attendanceService.getNowAttendance(user).getStartWorkTime());
+        Attendance nowAttendance = attendanceService.getNowAttendance(user);
+        boolean todayState = false;
 
-        }else if((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()!= null)){
-            todayState = false;
-        }else {
-            todayState = false;
+        if (nowAttendance != null) {
+            if (nowAttendance.getEndWorkTime() == null) {
+                todayState = true;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                String startWorkTimeString = nowAttendance.getStartWorkTime().format(formatter);
+
+                model.addAttribute("startWorkTime", startWorkTimeString);
+            }
         }
 
-        model.addAttribute("todayState",todayState);
+        model.addAttribute("todayState", todayState);
         model.addAttribute("user",user);
         model.addAttribute("paging",userList);
         return "member/user_member_list";
@@ -289,20 +290,20 @@ public class viewController {
         SiteUser user= this.userService.findUser(principal.getName());
 
         Page<CompanyFile> companyFiles = this.companyFileService.getCompanyFileList(page);
-        boolean todayState ;
-        if(attendanceService.getNowAttendance(user)==null){
-            todayState = false;
-        }else if ((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()== null) ) {
-            todayState = true;
-            model.addAttribute("startWorkTime",attendanceService.getNowAttendance(user).getStartWorkTime());
+        Attendance nowAttendance = attendanceService.getNowAttendance(user);
+        boolean todayState = false;
 
-        }else if((attendanceService.getNowAttendance(user) != null) & (attendanceService.getNowAttendance(user).getEndWorkTime()!= null)){
-            todayState = false;
-        }else {
-            todayState = false;
+        if (nowAttendance != null) {
+            if (nowAttendance.getEndWorkTime() == null) {
+                todayState = true;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                String startWorkTimeString = nowAttendance.getStartWorkTime().format(formatter);
+
+                model.addAttribute("startWorkTime", startWorkTimeString);
+            }
         }
 
-        model.addAttribute("todayState",todayState);
+        model.addAttribute("todayState", todayState);
         model.addAttribute("user",user);
         model.addAttribute("paging",companyFiles);
         return "companyFile/companyFile_list";
